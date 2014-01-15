@@ -11,7 +11,7 @@ weight: 800
 
 **Author**: Shay Hassidim, Deputy CTO, GigaSpaces<br/>
 Date: December  2009<br/>
-Latest Date: Feb 2011<br/>
+Latest Date: Jan 2014<br/>
 
 The following list should provide you with the main activities to be done prior moving your system into production. Reviewing this list and executing the relevant recommendations should result in a stable environment with a low probability of unexpected behavior or failures that are result of a GigaSpaces environment misconfiguration.
 
