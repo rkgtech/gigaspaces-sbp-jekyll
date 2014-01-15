@@ -424,7 +424,7 @@ JROCKIT -XXexitOnOutOfMemory
 
 These settings are good for cases where you are running a IMDG or when the business logic and the IMDG are collocated. For example IMDG with collocated Polling /Notify containers, Task executors or Service remoting:
 
-CMS mode - good for low latency:
+JDK 1.6 - CMS mode - good for low latency scnearios:
 
 {% highlight java %}
 -server -Xms8g -Xmx8g -Xmn300m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
@@ -432,6 +432,29 @@ CMS mode - good for low latency:
 -XX:MaxPermSize=256m -XX:+ExplicitGCInvokesConcurrent -XX:+UseCompressedOops
 -XX:+CMSClassUnloadingEnabled -XX:+CMSParallelRemarkEnabled
 {% endhighlight %}
+
+JDK 1.7 - g1 mode - good for low latency scnearios:
+
+{% highlight java %}
+-server -Xms8g -Xmx8g -XX:+UseG1GC -XX:MaxGCPauseMillis=500 -XX:InitiatingHeapOccupancyPercent=50
+{% endhighlight %}
+
+
+Advacned option with suggested values provided:
+{% highlight java %}
+-XX:MaxTenuringThreshold=25 -XX:ParallelGCThreads=8 -XX:ConcGCThreads=8
+-XX:G1ReservePercent=10 -XX:G1HeapRegionSize=32m
+
+-XX:+UseCompressedOops
+{% endhighlight %}
+
+Some useful references:
+http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/index.html
+http://stackoverflow.com/questions/8111310/java-7-jdk-7-garbage-collection-and-documentation
+http://blog.sematext.com/2013/06/24/g1-cms-java-garbage-collector/
+http://stackoverflow.com/questions/8262674/java7-g1-options
+http://mpouttuclarke.wordpress.com/2013/03/13/large-java-heap-with-g1-collector-part-1/
+
 
 {% tip %}
 It is highly recommended that you use the latest JDK release when using these options.
