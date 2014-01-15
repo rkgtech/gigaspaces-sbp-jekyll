@@ -434,18 +434,14 @@ JDK 1.6 - CMS mode - good for low latency scnearios:
 {% endhighlight %}
 
 JDK 1.7 - g1 mode - good for low latency scnearios:
-
 {% highlight java %}
--server -Xms8g -Xmx8g -XX:+UseG1GC -XX:MaxGCPauseMillis=500 -XX:InitiatingHeapOccupancyPercent=50
+-server -Xms8g -Xmx8g -XX:+UseG1GC -XX:MaxGCPauseMillis=500 -XX:InitiatingHeapOccupancyPercent=50 -XX:+UseCompressedOops
 {% endhighlight %}
 
-
-Advacned option with suggested values provided:
+Advanced options for JDK 1.7 with suggested values provided:
 {% highlight java %}
 -XX:MaxTenuringThreshold=25 -XX:ParallelGCThreads=8 -XX:ConcGCThreads=8
 -XX:G1ReservePercent=10 -XX:G1HeapRegionSize=32m
-
--XX:+UseCompressedOops
 {% endhighlight %}
 
 Some useful references:
