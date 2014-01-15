@@ -417,7 +417,7 @@ In most cases, the applications using GigaSpaces are leveraging machines with ve
 See below examples of JVM settings recommended for applications that might generate large number of temporary objects. In such situations you afford long pauses due to garbage collection activity.
 
 {% tip %}
- In case your JVM is throwing an OutOfMemoryException, the JVM process should be restarted. you need to add this property to your JVM setting:
+In case your JVM is throwing an 'OutOfMemoryException', the JVM process should be restarted. you need to add this property to your JVM setting:
 SUN -XX:+HeapDumpOnOutOfMemoryError -XX:OnOutOfMemoryError="kill -9 %p"
 JROCKIT -XXexitOnOutOfMemory
 {% endtip %}
@@ -445,11 +445,11 @@ Advanced options for JDK 1.7 with suggested values provided:
 {% endhighlight %}
 
 Some useful references:
-http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/index.html
-http://stackoverflow.com/questions/8111310/java-7-jdk-7-garbage-collection-and-documentation
-http://blog.sematext.com/2013/06/24/g1-cms-java-garbage-collector/
-http://stackoverflow.com/questions/8262674/java7-g1-options
-http://mpouttuclarke.wordpress.com/2013/03/13/large-java-heap-with-g1-collector-part-1/
+[Getting Started with the G1 Garbage Collector](http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/index.html)
+[jdk7 garbage collection and documentation](http://stackoverflow.com/questions/8111310/java-7-jdk-7-garbage-collection-and-documentation)
+[g1 cms java garbage collector](http://blog.sematext.com/2013/06/24/g1-cms-java-garbage-collector)
+[java7 g1 options](http://stackoverflow.com/questions/8262674/java7-g1-options)
+[large java heap with g1 collector part 1](http://mpouttuclarke.wordpress.com/2013/03/13/large-java-heap-with-g1-collector-part-1)
 
 
 {% tip %}
