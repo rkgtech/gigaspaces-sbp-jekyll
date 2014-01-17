@@ -23,6 +23,8 @@ weight: 1300
 
 Almost every large enterprise system includes legacy applications or backend systems that are communicating with the enterprise main database system for reporting, batch processing, data mining, OLAP and other processing activity. These applications might not need to access the data grid to improve their performance or scalability. They will be using the database directly. Once these systems perform data updates , removing data or add new records to the database, these updates might need to be reflected within the data grid. This synchronization activity ensures the data grid is consistent and up to date with the enterprise main database server.
 
+<iframe width="640" height="390" src="//www.youtube.com/embed/d0lZR98cnHM" frameborder="0" allowfullscreen></iframe>
+
 The Delta Server described with this best practice responsible for getting notifications from the database for any user activity (excluding data grid updates) and delegate these to the data grid. You may specify the exact data set updates to be delegated to the data grid by specifying a SQL Query that will indicate which records updates / removal / addition should be reflected within the data grid.
 
 # Scenario
