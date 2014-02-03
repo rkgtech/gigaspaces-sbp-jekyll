@@ -42,7 +42,7 @@ After completing the steps above your development and testing environment should
 - Centos Linux - puppet agent 
 - Windows 7 - puppet agent for windows
 
-[<img src="/attachment_files/puppet/puppet-xap1.jpg" width="400" height="300">](/attachment_files/sbp/puppet-xap1.jpg)
+[<img src="/attachment_files/puppet/puppet-xap1.jpg" width="400" height="300">](/attachment_files/puppet/puppet-xap1.jpg)
  
 # Installing XAP module dependencies
 XAP puppet module dependent on other puppet's modules that should be installed:
@@ -50,7 +50,7 @@ XAP puppet module dependent on other puppet's modules that should be installed:
 - Type password: puupet
 - List the already installed modules: puppet module list 
 
-[<img src="/attachment_files/puppet/puppet-xap2.jpg" width="400" height="300">](/attachment_files/sbp/puppet-xap2.jpg)
+[<img src="/attachment_files/puppet/puppet-xap2.jpg" width="400" height="300">](/attachment_files/puppet/puppet-xap2.jpg)
 
 ## Install all the required modules by running the following commands
 - puppet module install biemond/jdk7
