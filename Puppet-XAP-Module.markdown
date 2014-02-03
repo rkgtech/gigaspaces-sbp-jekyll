@@ -17,7 +17,7 @@ weight: 100
 {% compositionsetup %}
 
 # Overview
-This XAP module for Puppet performs 2 main tasks:
+This XAP module for Puppet performs two main tasks:
 1. Install Gigaspaces XAP.
 2. Configure node with one or more XAP roles e.g. Management role, Container role and Web-ui role.
 
