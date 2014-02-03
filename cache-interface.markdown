@@ -5,7 +5,7 @@ categories: SBP
 parent: data-access-patterns.html
 weight: 100
 ---
-{% summary page %}Explains how to implement a cache interface using the Map API.{% endsummary %}
+{% summary page %}This best practice explains how to implement a cache interface using the Map API.{% endsummary %}
  {% tip %}
  **Author**:  Shay Hassidim<br/>
  **Recently tested with GigaSpaces version**: XAP 9.6<br/>
@@ -17,10 +17,13 @@ weight: 100
 {% compositionsetup %}
 
 
-GigaSpaces XAP .....
-
 # Overview
 
+GigaSpaces XAP .....
+
+# Implementation
+
+The implementation includes two classes. The 'Data' class that modles the data within the space and the 'CacheService' class that wrpas the GigaSpace API using standard Map API ('put','get' , 'remove'..). 
 
 {% highlight java %}
 import com.gigaspaces.annotation.pojo.SpaceId;
