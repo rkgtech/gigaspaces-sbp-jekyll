@@ -14,28 +14,35 @@ weight: 100
 {% toc minLevel=1|maxLevel=1|type=flat|separator=pipe %}
 {% endtip %}
 
-{% compositionsetup %}
+
 
 # Overview
 This XAP module for Puppet performs two main tasks:
-1. Install Gigaspaces XAP.
-2. Configure node with one or more XAP roles e.g. Management role, Container role and Web-ui role.
+
+**Step 1:** Install Gigaspaces XAP.
+
+**Step 2:** Configure node with one or more XAP roles e.g. Management role, Container role and Web-ui role.
 
 
 # Preparing Development and Testing Environment
 To simulate the IT network we have built 3 virtual machines with VirtuaBox.
-1. Download and install Virtual Box
-2. Download the learning puppet VM notify to download the OVF file.
-http://info.puppetlabs.com/download-learning-puppet-VM.html
+
+**Step 1:** Download and install Virtual Box
+
+**Step 2:** Download the learning puppet VM notify to download the OVF file. http://info.puppetlabs.com/download-learning-puppet-VM.html
+
 After download is completed follow the instructions at **Importing the VM into VirtualBox**. When the import is complete successfully the puppet master is ready.
-3. To prepare puppet agent clone the puppet master and follow the instructions at **Learning Puppet - Preparing an Agent VM**.
-4.  Create a new VM with windows 7 installation then download and puppet agent for windows and install it. 
+
+**Step 3:** To prepare puppet agent clone the puppet master and follow the instructions at **Learning Puppet - Preparing an Agent VM**.
+
+**Step 4:**  Create a new VM with windows 7 installation then download and puppet agent for windows and install it.
+
 After completing the steps above your development and testing environment should consist of 3 virtual machines:
 - Centos Linux - puppet master
 - Centos Linux - puppet agent 
 - Windows 7 - puppet agent for windows
 
-[<img src="/attachment_files/sbp/puppet-xap1.jpg" width="400" height="300">](/attachment_files/sbp/puppet-xap1.jpg)
+[<img src="/attachment_files/puppet/puppet-xap1.jpg" width="400" height="300">](/attachment_files/sbp/puppet-xap1.jpg)
  
 # Installing XAP module dependencies
 XAP puppet module dependent on other puppet's modules that should be installed:
@@ -43,7 +50,7 @@ XAP puppet module dependent on other puppet's modules that should be installed:
 - Type password: puupet
 - List the already installed modules: puppet module list 
 
-[<img src="/attachment_files/sbp/puppet-xap2.jpg" width="400" height="300">](/attachment_files/sbp/puppet-xap2.jpg)
+[<img src="/attachment_files/puppet/puppet-xap2.jpg" width="400" height="300">](/attachment_files/sbp/puppet-xap2.jpg)
 
 ## Install all the required modules by running the following commands
 - puppet module install biemond/jdk7
@@ -52,12 +59,12 @@ XAP puppet module dependent on other puppet's modules that should be installed:
 
 ## List the installed module again by running: puppet module list , and you expected to see the above module is installed.  
 
-[<img src="/attachment_files/sbp/puppet-xap3.jpg" width="400" height="300">](/attachment_files/sbp/puppet-xap3.jpg)
+[<img src="/attachment_files/puppet/puppet-xap3.jpg" width="400" height="300">](/attachment_files/puppet/puppet-xap3.jpg)
 
 ## Installing The XAP module
 To install the XAP module copy XAP folder under the `modules` directory in your puppet labs installation.
 - Navigate to your puppet labs configuration directory: 
-{% highlight %}
+{% highlight java%}
 a. cd /etc/puppetlabs/puppet/modules/ and then Copy the xap directory under the modules directory
 b. If you clone it from github:
 cd /etc/puppetlabs/puppet/modules/
@@ -67,7 +74,7 @@ mv xap-puppet xap
 
 - Run: puppet module list, to see the module:
 
-[<img src="/attachment_files/sbp/puppet-xap4.jpg" width="400" height="300">](/attachment_files/sbp/puppet-xap4.jpg)
+[<img src="/attachment_files/puppet/puppet-xap4.jpg" width="400" height="300">](/attachment_files/puppet/puppet-xap4.jpg)
  
 
 ## XAP Module Directory Layout
@@ -76,11 +83,11 @@ The directory layout and structure is a standard puppet module layout:
 - manifests - include all the logic and classed the module used
 - templates - include all the template files used to generate scripts at runtime when agent node request a configuration catalog
 
-[<img src="/attachment_files/sbp/puppet-xap5.jpg" width="400" height="300">](/attachment_files/sbp/puppet-xap5.jpg)
+[<img src="/attachment_files/puppet/puppet-xap5.jpg" width="400" height="300">](/attachment_files/puppet/puppet-xap5.jpg)
 
 ## Module Classes and Roles
 The `init.pp` is the entry point of any puppet module. 
-{% highlight %}
+{% highlight java%}
 # base role to be extended
 class xap{
 
@@ -148,7 +155,7 @@ class xap::webui inherits xap {
 ## params.pp 
 
 The params.pp should include all the configuration. See example below:
-{% highlight %}
+{% highlight java %}
 class xap::params { 
  
   $jdk_version = '7' # jdk version 
@@ -249,7 +256,7 @@ There are 3 roles supported:
 3. xap::webui
 
 To attached a node to a role edit the `/etc/puppetlabs/puppet/manifests/site.pp` and add for each node the target roles. Example:
-{% highlight %}
+{% highlight java %}
 ## site.pp ##
 
 # This file (/etc/puppetlabs/puppet/manifests/site.pp) is the main entry point
