@@ -26,11 +26,11 @@ GigaSpaces XAP provides a powerful IMDG with advanced data access options. Many 
 
 The implementation includes two classes. The `Data` class that model the data within the space and the `CacheService` class that wraps the `GigaSpace` API using standard `Map` API (`put`,`get` , `remove`..). 
 
-The `CacheService` support inserting data using a key/value and also via region/key/value. A region allows you to mark entries with a "tag" that groups these for better management. When constructing a `CacheService` you may indicate if you would like to have the data cached also at the client side. In such a case , the client will have a copy of the data maintained for fast data access avoiding any remote calls or serialization activity. Once the client application constructs the `CacheService` all cached data will be pre-loaded into the client side. Make sure the client will have sufficiant heap size configured (`Xmx`) to accomodate all entries.
+The `CacheService` support inserting data using a key/value and also via region/key/value. A region allows you to mark entries with a "tag" that groups these for better management. When constructing a `CacheService` you may indicate if you would like to have the data cached also at the client side. In such a case , the client will have a copy of the data maintained for fast data access avoiding any remote calls or serialization activity. Once the client application constructs the `CacheService` all cached data will be pre-loaded into the client side. Make sure the client will have sufficient heap size configured (`Xmx`) to accommodate all entries.
 
 ## The Data Space Class
 
-The Data Space Class holds the key , value and region data within a simple POJO proprties. The `@SpaceId` annotation indicats the key field specified as the Space class ID field. 
+The Data Space Class holds the key , value and region data within a simple POJO properties. The `@SpaceId` annotation indicates the key field specified as the Space class ID field. 
 
 {% highlight java %}
 import com.gigaspaces.annotation.pojo.SpaceId;
@@ -87,7 +87,7 @@ public Object getValue() {
 {% endhighlight %}
 
 ## The CacheService
-The `CacheService` leveraging the `GigaSpace` interface implementing the standrad `put`,`get`,`remove`,etc. methods:
+The `CacheService` leveraging the `GigaSpace` interface implementing the standard `put`,`get`,`remove`,etc. methods:
 {% highlight java %}
 import java.util.HashSet;
 import java.util.Iterator;
@@ -258,7 +258,7 @@ map.put("key3", "value");
 cacheService.putAll(map);
 {% endhighlight %}
 
-# Further reading:
+# Further reading
 
 - [Modeling and Accessing Your Data]({%latestjavaurl%}/modeling-and-accessing-your-data.html)
 - [Deploying and Interacting with the Space]({%latestjavaurl%}/deploying-and-interacting-with-the-space.html)
