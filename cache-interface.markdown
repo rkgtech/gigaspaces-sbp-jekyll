@@ -19,14 +19,14 @@ weight: 100
 
 # Overview
 
-GigaSpaces XAP provides a powerful IMDG with advanced data access options. Many times a simple key/value interface required to access the IMDG. The most popular one is the Map API. GigaSpaces main data access API is the `GigaSpace` interface. A simple wrapper around it described here exposing Map API.
+GigaSpaces XAP provides a powerful IMDG with advanced data access options. Many times a simple key/value interface required to access the IMDG. The most popular one is the Map API. GigaSpaces main data access API is the `GigaSpace` interface. A simple wrapper around it described here exposing `Map` API.
 
 
 # Cache Interface Implementation
 
-The implementation includes two classes. The `Data` class that modles the data within the space and the `CacheService` class that wraps the `GigaSpace` API using standard `Map` API (`put`,`get` , `remove`..). 
+The implementation includes two classes. The `Data` class that model the data within the space and the `CacheService` class that wraps the `GigaSpace` API using standard `Map` API (`put`,`get` , `remove`..). 
 
-The `CacheService` support inserting data using a key/value and also via region/key/value. A region allows you to mark entries with a "tag" that group these for better management. You may also indicate if you would like to have the data cached also at the client side. In such a case , the client will also have a copy of the data. Once the client application constructs the `CacheService` all cached data will be pre-loaded into the client side.
+The `CacheService` support inserting data using a key/value and also via region/key/value. A region allows you to mark entries with a "tag" that groups these for better management. When constructing a `CacheService` you may indicate if you would like to have the data cached also at the client side. In such a case , the client will have a copy of the data maintained for fast data access avoiding any remote calls or serialization activity. Once the client application constructs the `CacheService` all cached data will be pre-loaded into the client side. Make sure the client will have sufficiant heap size configured (`Xmx`) to accomodate all entries.
 
 ## The Data Space Class
 
@@ -87,7 +87,7 @@ public Object getValue() {
 {% endhighlight %}
 
 ## The CacheService
-The `CacheService` leveraging the 'GigaSpace' interface implementing the standrad `put`,`get`,`remove`,etc. methods:
+The `CacheService` leveraging the `GigaSpace` interface implementing the standrad `put`,`get`,`remove`,etc. methods:
 {% highlight java %}
 import java.util.HashSet;
 import java.util.Iterator;
@@ -238,6 +238,24 @@ public class CacheService
 	}
 }
 
+{% endhighlight %}
+
+See example how the `CacheService` can be used accessing IMDG called 'mySpace':
+{% highlight java %}
+CacheService cacheService = new CacheService("jini//*/*/mySpace");
+
+cacheService.put("key1", "value1");
+cacheService.put("region1" , "key2", "value2");
+		
+cacheService.remove("key1");
+
+cacheService.clear();
+
+Map<String, Object> map = new HashMap<String, Object>();
+map.put("key1", "value");
+map.put("key2", "value");
+map.put("key3", "value");
+cacheService.putAll(map);
 {% endhighlight %}
 
 # Further reading:
