@@ -132,6 +132,10 @@ public class CacheService {
 
 	}
 
+	public void put(String key, Object value) throws Exception {
+		put(null, key, value);
+	}
+
 	public void put(String region, String key, Object value) throws Exception {
 		Data d = new Data();
 		d.setKey(key);
