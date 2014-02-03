@@ -24,9 +24,9 @@ GigaSpaces XAP provides a powerful IMDG with advanced data access options. Many 
 
 # Implementation
 
-The implementation includes two classes. The 'Data' class that modles the data within the space and the 'CacheService' class that wrpas the GigaSpace API using standard Map API ('put','get' , 'remove'..). 
+The implementation includes two classes. The `Data` class that modles the data within the space and the `CacheService` class that wrpas the GigaSpace API using standard Map API (`put`,`get` , `remove`..). 
 
-The 'CacheService' support inserting data using a key/value and also via region/key/value. A region allow you to mark entries with a "tag" that group these for better managment. You may also indicate if you would like to have the data cached also at the client side. In such a case , the client will also have a copy of the data. Once the client will construct the 'CacheService' all cached data will be pre-loaded into the client side.
+The `CacheService` support inserting data using a key/value and also via region/key/value. A region allow you to mark entries with a "tag" that group these for better managment. You may also indicate if you would like to have the data cached also at the client side. In such a case , the client will also have a copy of the data. Once the client will construct the `CacheService` all cached data will be pre-loaded into the client side.
 
 {% highlight java %}
 import com.gigaspaces.annotation.pojo.SpaceId;
