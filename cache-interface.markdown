@@ -19,14 +19,18 @@ weight: 100
 
 # Overview
 
-GigaSpaces XAP provides a powerful IMDG with advanced data access options. Many times a simple key/value interface requered to access the IMDG. The most popular one is the Map API. GigaSpaces main data access API is the GigaSpace interface. A simple wrapper around it desribed here exposing Map API.
+GigaSpaces XAP provides a powerful IMDG with advanced data access options. Many times a simple key/value interface required to access the IMDG. The most popular one is the Map API. GigaSpaces main data access API is the `GigaSpace` interface. A simple wrapper around it described here exposing Map API.
 
 
-# Implementation
+# Cache Interface Implementation
 
-The implementation includes two classes. The `Data` class that modles the data within the space and the `CacheService` class that wrpas the GigaSpace API using standard Map API (`put`,`get` , `remove`..). 
+The implementation includes two classes. The `Data` class that modles the data within the space and the `CacheService` class that wraps the `GigaSpace` API using standard `Map` API (`put`,`get` , `remove`..). 
 
-The `CacheService` support inserting data using a key/value and also via region/key/value. A region allow you to mark entries with a "tag" that group these for better managment. You may also indicate if you would like to have the data cached also at the client side. In such a case , the client will also have a copy of the data. Once the client will construct the `CacheService` all cached data will be pre-loaded into the client side.
+The `CacheService` support inserting data using a key/value and also via region/key/value. A region allows you to mark entries with a "tag" that group these for better management. You may also indicate if you would like to have the data cached also at the client side. In such a case , the client will also have a copy of the data. Once the client application constructs the `CacheService` all cached data will be pre-loaded into the client side.
+
+## The Data Space Class
+
+The Data Space Class holds the key , value and region data within a simple POJO proprties. The `@SpaceId` annotation indicats the key field specified as the Space class ID field. 
 
 {% highlight java %}
 import com.gigaspaces.annotation.pojo.SpaceId;
@@ -63,7 +67,27 @@ public class Data {
 
 {% endhighlight %}
 
+### Optimzing Value Object Serialization and Storage
+The `Data` class can be modified to support better serialization for the value object. You may store the value object in binary format or compressed format.
 
+To store the value object in a binary format the `getValue` should have the following:
+{% highlight java %}
+@SpaceStorageType(storageType=StorageType.BINARY)
+public Object getValue() {
+	return value;
+}
+{% endhighlight %}
+
+To store the value object in a compressed format the `getValue` should have the following:
+{% highlight java %}
+@SpaceStorageType(storageType=StorageType.COMPRESSED)
+public Object getValue() {
+	return value;
+}
+{% endhighlight %}
+
+## The CacheService
+The `CacheService` leveraging the 'GigaSpace' interface implementing the standrad `put`,`get`,`remove`,etc. methods:
 {% highlight java %}
 import java.util.HashSet;
 import java.util.Iterator;
@@ -100,7 +124,6 @@ public class CacheService
 		{
 			LocalViewSpaceConfigurer localViewConfigurer = new LocalViewSpaceConfigurer(urlConfigurer)
 				.addViewQuery(new SQLQuery<Data>(Data.class, ""));
-			// Create local view:
 			spaceView = new GigaSpaceConfigurer(localViewConfigurer).gigaSpace();
 		}
 		else
@@ -135,8 +158,6 @@ public class CacheService
 		space.clear(new Data());
 	}
 
-	
-	
     public Object get(String key) throws Exception 
     {
 		Data d = spaceView.readById(Data.class, key);
@@ -154,14 +175,12 @@ public class CacheService
     	space.clear(templ);
     }
 
-    
     public void remove(String key) throws Exception 
     {
     	IdQuery<Data> idquery = new IdQuery<Data>(Data.class, key);
     	space.clear(idquery);
     }
 
-    
 	public boolean containsKey(String key) {
     	IdQuery<Data> idquery = new IdQuery<Data>(Data.class, key);
 		int count = spaceView.count(idquery);
@@ -221,11 +240,7 @@ public class CacheService
 
 {% endhighlight %}
 
-{% tip %}
-bla bla bla bla 
-{% endtip %}
-
-## Further reading:
+# Further reading:
 
 - [Modeling and Accessing Your Data]({%latestjavaurl%}/modeling-and-accessing-your-data.html)
 - [Deploying and Interacting with the Space]({%latestjavaurl%}/deploying-and-interacting-with-the-space.html)
