@@ -19,11 +19,14 @@ weight: 100
 
 # Overview
 
-GigaSpaces XAP .....
+GigaSpaces XAP provides a powerful IMDG with advanced data access options. Many times a simple key/value interface requered to access the IMDG. The most popular one is the Map API. GigaSpaces main data access API is the GigaSpace interface. A simple wrapper around it desribed here exposing Map API.
+
 
 # Implementation
 
 The implementation includes two classes. The 'Data' class that modles the data within the space and the 'CacheService' class that wrpas the GigaSpace API using standard Map API ('put','get' , 'remove'..). 
+
+The 'CacheService' support inserting data using a key/value and also via region/key/value. A region allow you to mark entries with a "tag" that group these for better managment. You may also indicate if you would like to have the data cached also at the client side. In such a case , the client will also have a copy of the data. Once the client will construct the 'CacheService' all cached data will be pre-loaded into the client side.
 
 {% highlight java %}
 import com.gigaspaces.annotation.pojo.SpaceId;
@@ -62,7 +65,6 @@ public class Data {
 
 
 {% highlight java %}
-package org.openspaces.cache;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
