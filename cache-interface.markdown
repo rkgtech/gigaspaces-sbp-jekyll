@@ -102,109 +102,100 @@ import org.openspaces.core.space.cache.LocalViewSpaceConfigurer;
 import com.gigaspaces.query.IdQuery;
 import com.j_spaces.core.client.SQLQuery;
 
-public class CacheService 
-{
+public class CacheService {
 	private GigaSpace spaceView;
 	private GigaSpace space;
 	boolean localView;
 
 	public CacheService(String url) throws Exception {
-		init(url,false);
+		init(url, false);
 	}
 
-	public CacheService(String url , boolean clientCache) throws Exception {
+	public CacheService(String url, boolean clientCache) throws Exception {
 		init(url, clientCache);
 	}
-	
-	public void init(String url , boolean clientCache) throws Exception {
+
+	public void init(String url, boolean clientCache) throws Exception {
 		this.localView = clientCache;
 		UrlSpaceConfigurer urlConfigurer = new UrlSpaceConfigurer(url);
-		space= new GigaSpaceConfigurer(urlConfigurer).gigaSpace();
-		if (localView)
-		{
-			LocalViewSpaceConfigurer localViewConfigurer = new LocalViewSpaceConfigurer(urlConfigurer)
-				.addViewQuery(new SQLQuery<Data>(Data.class, ""));
-			spaceView = new GigaSpaceConfigurer(localViewConfigurer).gigaSpace();
+		space = new GigaSpaceConfigurer(urlConfigurer).gigaSpace();
+		if (localView) {
+			LocalViewSpaceConfigurer localViewConfigurer = new LocalViewSpaceConfigurer(
+					urlConfigurer).addViewQuery(new SQLQuery<Data>(Data.class,
+					""));
+			// Create local view:
+			spaceView = new GigaSpaceConfigurer(localViewConfigurer)
+					.gigaSpace();
+		} else {
+			spaceView = space;
 		}
-		else
-		{
-			spaceView  = space;
-		}
-		
-	}    	
-	
-    public void put(String region, String key, Object value) throws Exception 
-    {
+
+	}
+
+	public void put(String region, String key, Object value) throws Exception {
 		Data d = new Data();
 		d.setKey(key);
 		d.setValue(value);
 		d.setRegion(region);
 		space.write(d);
-    }
+	}
 
-    public Object get(String region , String key) throws Exception 
-    {
-    	Data templ = new Data();
-    	templ.setKey(key);
-    	templ.setRegion(region);
+	public Object get(String region, String key) throws Exception {
+		Data templ = new Data();
+		templ.setKey(key);
+		templ.setRegion(region);
 		Data d = spaceView.read(templ);
-		if (d!=null)
+		if (d != null)
 			return d.getValue();
-		else 
+		else
 			return null;
-    }
+	}
 
 	public void clear() {
 		space.clear(new Data());
 	}
 
-    public Object get(String key) throws Exception 
-    {
+	public Object get(String key) throws Exception {
 		Data d = spaceView.readById(Data.class, key);
-		if (d!=null)
+		if (d != null)
 			return d.getValue();
-		else 
+		else
 			return null;
-    }
-
-    public void remove(String region, String key) throws Exception 
-    {
-    	Data templ = new Data();
-    	templ.setKey(key);
-    	templ.setRegion(region);
-    	space.clear(templ);
-    }
-
-    public void remove(String key) throws Exception 
-    {
-    	IdQuery<Data> idquery = new IdQuery<Data>(Data.class, key);
-    	space.clear(idquery);
-    }
-
-	public boolean containsKey(String key) {
-    	IdQuery<Data> idquery = new IdQuery<Data>(Data.class, key);
-		int count = spaceView.count(idquery);
-    	return (count>0);
 	}
 
-	public int size() throws Exception 
-    {
+	public void remove(String region, String key) throws Exception {
+		Data templ = new Data();
+		templ.setKey(key);
+		templ.setRegion(region);
+		space.clear(templ);
+	}
+
+	public void remove(String key) throws Exception {
+		IdQuery<Data> idquery = new IdQuery<Data>(Data.class, key);
+		space.clear(idquery);
+	}
+
+	public boolean containsKey(String key) {
+		IdQuery<Data> idquery = new IdQuery<Data>(Data.class, key);
+		int count = spaceView.count(idquery);
+		return (count > 0);
+	}
+
+	public int size() throws Exception {
 		return spaceView.count(new Data());
-    }
+	}
 
-	public int size(String region) throws Exception 
-    {
-    	Data templ = new Data();
-    	templ.setRegion(region);
+	public int size(String region) throws Exception {
+		Data templ = new Data();
+		templ.setRegion(region);
 		return spaceView.count(templ);
-    }
+	}
 
-	public void putAll(String region , Map<String,Object> map) {
+	public void putAll(String region, Map<String, Object> map) {
 		Data d[] = new Data[map.size()];
-		int count=0;
-		Iterator<String>  keys = map.keySet().iterator();
-		while (keys.hasNext())
-		{
+		int count = 0;
+		Iterator<String> keys = map.keySet().iterator();
+		while (keys.hasNext()) {
 			String key = keys.next();
 			Object val = map.get(key);
 			d[count] = new Data();
@@ -215,22 +206,22 @@ public class CacheService
 		}
 		space.writeMultiple(d);
 	}
-	
-	public void putAll(Map<String,Object> map) {
-		putAll(null , map);
+
+	public void putAll(Map<String, Object> map) {
+		putAll(null, map);
 	}
-	
+
 	public Set<String> keySet() throws Exception {
 		SQLQuery<Data> query = null;
 		if (localView)
 			query = new SQLQuery<Data>(Data.class, "");
 		else
-    	 query = new SQLQuery<Data>(Data.class, "").setProjections("key");
+			query = new SQLQuery<Data>(Data.class, "").setProjections("key");
 
-    	Data d[] = spaceView.readMultiple(query);
-    	
-    	Set<String> keys = new HashSet<String>();
-		
+		Data d[] = spaceView.readMultiple(query);
+
+		Set<String> keys = new HashSet<String>();
+
 		for (int i = 0; i < d.length; i++) {
 			keys.add(d[i].getKey());
 		}
