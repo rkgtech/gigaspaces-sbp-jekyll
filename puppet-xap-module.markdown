@@ -250,12 +250,12 @@ $com_gs_transport_protocol_lrmi_max_conn_pool=1024
 {% endhighlight %}
 
 ## Site Configuration
-There are 3 roles supported:
+There are three roles supported:
 1. xap::manager role
 2. xap::container role
 3. xap::webui
 
-To attached a node to a role edit the `/etc/puppetlabs/puppet/manifests/site.pp` and add for each node the target roles. Example:
+To associate a node with a role edit the `/etc/puppetlabs/puppet/manifests/site.pp` and add for each node the target roles. Example:
 {% highlight java %}
 ## site.pp ##
 
