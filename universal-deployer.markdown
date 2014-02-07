@@ -6,7 +6,7 @@ parent: production.html
 weight: 1500
 ---
 
-{% compositionsetup %}
+
 
 {% tip %}
 **Summary:** {% excerpt %}GigaSpaces Universal Deployer tool. Allows deploying composite applications without any coding.{% endexcerpt %}<br/>
@@ -19,7 +19,7 @@ weight: 1500
 {% endtip %}
 
 # Overview
-The GigaSpaces Universal Deployer (GUD) allows deploying the different supported processing units ([Space PU]({%latestjavaurl%}/deploying-and-interacting-with-the-space.html), [Regular PU]({%latestjavaurl%}/packaging-and-deployment.html), [Elastic PU]({%latestjavaurl%}/elastic-processing-unit.html), [memCache PU]({%latestjavaurl%}/memcached-api.html) or [Web PU]({%latestjavaurl%}/web-processing-unit-container.html) via a simple configuration file. The GUD support dependency based deployment allowing multiple processing units to be deployed as one atomic process (e.g composite application).
+The GigaSpaces Universal Deployer (GUD) allows deploying the different supported processing units ([Space PU]({%latestjavaurl%}/administrators-guide.html), [Regular PU]({%latestjavaurl%}/packaging-and-deployment.html), [Elastic PU]({%latestjavaurl%}/elastic-processing-unit.html), [memCache PU]({%latestjavaurl%}/memcached-api.html) or [Web PU]({%latestjavaurl%}/web-processing-unit-container.html) via a simple configuration file. The GUD support dependency based deployment allowing multiple processing units to be deployed as one atomic process (e.g composite application).
 
 {% tip %}
 Starting with XAP 9 you may use the **Deployment Dependencies API** to specify the deployment order. See the [Application Deployment and Processing Unit Dependencies]({%latestjavaurl%}/deploying-onto-the-service-grid.html#Application+Deployment+and+Processing+Unit+Dependencies) for details.

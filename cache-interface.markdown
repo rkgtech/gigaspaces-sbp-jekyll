@@ -14,7 +14,7 @@ weight: 100
 {% toc minLevel=1|maxLevel=1|type=flat|separator=pipe %}
 {% endtip %}
 
-{% compositionsetup %}
+
 
 
 # Overview

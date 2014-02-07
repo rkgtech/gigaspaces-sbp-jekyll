@@ -6,7 +6,7 @@ parent: data-access-patterns.html
 weight: 1100
 ---
 
-{% compositionsetup %}
+
 
 {% tip %}
 **Summary:** {% excerpt %}Moving Spring/Hibernate Application to GigaSpaces{% endexcerpt %}<br/>
@@ -20,7 +20,7 @@ weight: 1100
 
 # Overview
 The following example is based on the standard [Spring Hibernate Integration tutorial](http://www.vaannila.com/spring/spring-hibernate-integration-1.html).
-In this best practice you will see how to modify an existing simple spring/hibernate application to leverage GigaSpaces as the [in-memory Data-grid]({%latestjavaurl%}/the-in-memory-data-grid.html) and the application server hosting both the [web application]({%latestjavaurl%}/web-application-support.html) and the data in-memory. The Hibernate persistency settings will still be leveraged by [GigaSpaces Hibernate External Data Source]({%latestjavaurl%}/hibernate-space-persistency.html) storing the data in-memory into a database in an [asynchronous manner]({%latestjavaurl%}/asynchronous-persistency-with-the-mirror.html).
+In this best practice you will see how to modify an existing simple spring/hibernate application to leverage GigaSpaces as the [in-memory Data-grid](/product_overview/the-in-memory-data-grid.html) and the application server hosting both the [web application]({%latestjavaurl%}/web-application-support.html) and the data in-memory. The Hibernate persistency settings will still be leveraged by [GigaSpaces Hibernate External Data Source]({%latestjavaurl%}/hibernate-space-persistency.html) storing the data in-memory into a database in an [asynchronous manner]({%latestjavaurl%}/asynchronous-persistency-with-the-mirror.html).
 
 Moving Spring/Hibernate application to GigaSpaces involves the following basic steps:
 

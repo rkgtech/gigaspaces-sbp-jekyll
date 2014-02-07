@@ -6,7 +6,7 @@ parent: data-access-patterns.html
 weight: 200
 ---
 
-{% compositionsetup %}
+
 
 {% tip %}
 **Summary:** {% excerpt %}This article illustrates the approaches that can be used to build Custom Eviction functionality.{% endexcerpt %}<br/>
@@ -22,7 +22,7 @@ GigaSpaces being an in memory grid, is limited by the amount of memory allocated
 
 GigaSpaces supports two cache policies, [LRU]({%latestjavaurl%}/lru-cache-policy.html) and [ALL_IN_CACHE]({%latestjavaurl%}/all-in-cache-cache-policy.html). GigaSpace evicts data only in the [LRU]({%latestjavaurl%}/lru-cache-policy.html) mode, where "oldest" objects are evicted from memory when the configured thresholds are reached.
 
-As the name suggests LRU is "least recently used" data and any data written first into the space become a candidate for eviction when there is no more room in the JVM. This policy works well for [Side Cache scenarios]({%latestjavaurl%}/caching-scenarios.html#cachingscenarios-sideCache) where the purpose of GigaSpaces is to cache frequently used data.
+As the name suggests LRU is "least recently used" data and any data written first into the space become a candidate for eviction when there is no more room in the JVM. This policy works well for [Side Cache scenarios](/product_overview/caching-scenarios.html#cachingscenarios-sideCache) where the purpose of GigaSpaces is to cache frequently used data.
 
 
 # Eviction Strategies

@@ -11,6 +11,7 @@ This section contains GigaSpaces usage patterns, best practices and solutions. E
 {: .table .table-bordered}
 | Best Practice | Level | Description |
 |:--------------|:------|:------------|
+|[Cache Interface](./cache-interface.html) | Beginner | This best practice explains how to implement a cache interface using the Map API.|
 |[Moving from Hibernate to Space](./moving-from-hibernate-to-space.html) | Beginner | Moving from Database Centric into In-Memory Model. Can be used when moving from **J2EE Session Bean** into XAP.|
 |[Finding Partition Load](./finding-partition-load.html)| Beginner | Monitoring Data Grid partitions in real time.|
 |[Even Data Distribution](./even-data-distribution.html)| Beginner | Technique to ensure even data load-balancing with partitioned IMDG.|
@@ -70,6 +71,9 @@ This section contains GigaSpaces usage patterns, best practices and solutions. E
 |[Capacity Planning](./capacity-planning.html)| Advanced | Considerations for sizing your system before moving into production.|
 |[Refreshable Business Logic Example](./refreshable-business-logic-example.html)| Advanced | Using the administration API to reload new application code (hot deploy) while the application is running.|
 |[Recipes For XAP Cloud Deployment](./automated-xap-deployment-with-cloudify.html)| Advanced | Recipes For XAP Cloud Deployment.|
+|[Puppet to install and configure XAP](./puppet-xap-module.html)| Advanced | This best practice explains how to use Puppet to install and configure XAP.|
+
+
 
 
 
