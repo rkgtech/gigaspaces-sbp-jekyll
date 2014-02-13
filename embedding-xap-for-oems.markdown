@@ -6,9 +6,9 @@ parent: production.html
 weight: 100
 ---
 
-{% compositionsetup %}
 
-{% summary page %}Explains how to deploy and manage a [Data Grid]({%latestjavaurl%}/the-in-memory-data-grid.html), catering to quick OEM installation.{% endsummary %}
+
+{% summary page %}Explains how to deploy and manage a [Data Grid](/product_overview/the-in-memory-data-grid.html), catering to quick OEM installation.{% endsummary %}
 
 GigaSpaces XAP can be used as a self contained application platform in which case your application would be contained (embedded) within the GigaSpaces application container. GigaSpaces XAP can also be embedded within external application processes. This section describe the steps required to embed GigaSpaces within external application processes.
 
@@ -98,6 +98,6 @@ GigaSpace space=DataGridConnectionUtility.getSpace("myGrid");
 
 ## Further reading:
 
-- [Modeling and Accessing Your Data]({%latestjavaurl%}/modeling-and-accessing-your-data.html)
-- [Deploying and Interacting with the Space]({%latestjavaurl%}/deploying-and-interacting-with-the-space.html)
+- [Modeling and Accessing Your Data]({%latestjavaurl%}/modeling-your-data.html)
+- [Deploying and Interacting with the Space]({%latestjavaurl%}/administrators-guide.html)
 

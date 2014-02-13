@@ -6,7 +6,7 @@ parent: excel-that-scales-solution.html
 weight: 100
 ---
 
-{% summary page|65 %}Using the calculation offload pattern.{% endsummary %}
+{% summary%}Using the calculation offload pattern.{% endsummary %}
 
 # Overview
 
@@ -30,7 +30,7 @@ As a first step, you need to load your data from its current source to the space
 GigaSpaces provides [OpenSpaces](/product_overview/index.html) as its main API. However, it is also possible to load data from different types of applications transparently, using different connectors implemented by GigaSpaces:
 
 - For messaging-based applications, refer to the [JMS]({%latestjavaurl%}/jms---basics.html) section.
-- If your application is an external data source (like a database), refer to the [Persistency]({%latestjavaurl%}/persistency.html) section.
+- If your application is an external data source (like a database), refer to the [Persistency]({%latestjavaurl%}/space-persistency.html) section.
 
 ## 2 -- Implementing Algorithm
 
