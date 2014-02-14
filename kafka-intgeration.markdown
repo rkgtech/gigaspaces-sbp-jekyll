@@ -60,7 +60,7 @@ select * from PERSON;
 
 The following maven dependency needs to be included to your project in order to use Kafka persistence. This artifact is built from `<project_rood>/kafka-persistence` source directory.
 
-{% highlight xml%}
+{% highlight xml %}
 <dependency>
 	<groupId>com.epam</groupId>
 	<artifactId>kafka-persistence</artifactId>
@@ -73,7 +73,7 @@ The following maven dependency needs to be included to your project in order to 
 
 Here is an example of Kafka Space Synchronization Endpoint configuration:
 
-{% highlight xml%}
+{% highlight xml %}
 <bean id="kafkaSpaceSynchronizationEndpoint" class="com.epam.openspaces.persistency.kafka.KafkaSpaceSynchronizationEndpointFactoryBean">
 	<property name="producerProperties">
 		<props>
@@ -128,7 +128,7 @@ public Product() {
 
 It’s also possible to configure name of the property which defines the Kafka topic for SpaceDocuments. Set spaceDocumentKafkaTopicName to the desired value as shown below.
 
-{% highlight xml%}
+{% highlight xml %}
 <bean id="kafkaSpaceSynchronizationEndpoint" class="com.epam.openspaces.persistency.kafka.KafkaSpaceSynchrspaceDocumentKafkaTopicNameonizationEndpointFactoryBean">
 	...
 	<property name="spaceDocumentKafkaTopicName" value="topic_name" />
