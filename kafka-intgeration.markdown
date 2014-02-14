@@ -3,7 +3,7 @@ layout: post
 title:  GigaSpaces XAP Kafka integration
 categories: SBP
 parent: processing.html
-weight: 100
+weight: 1000
 ---
 {% summary page %}This best practice explains how to use use Kafka with XAP.{% endsummary %}
  {% tip %}
