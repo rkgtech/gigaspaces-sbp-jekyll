@@ -34,22 +34,22 @@ The example application located in `<project_root>/example`. It demonstrates how
 
 ## Running the Example
 In order to run an example, please follow the instruction below:
-1.	Install Kafka
-2.	Start Zookeeper and Kafka server
+1.	Install Kafka<br/>
+2.	Start Zookeeper and Kafka server<br/>
 bin/zookeeper-server-start.sh config/zookeeper.properties
 bin/kafka-list-topic.sh --zookeeper localhost:2181
-3.	Build project
-{% highlight java%}
+3.	Build project<br/>
+{% highlight java %}
 cd <project_root>
 mvn clean install
 {% endhighlight %}
-4.	Deploy example to GigaSpaces
-{% highlight java%}
+4.	Deploy example to GigaSpaces<br/>
+{% highlight java %}
 cd example
 mvn os:deploy
 {% endhighlight %}
-5.	Run HsqlDB client and make sure data is populated into ‘data’ table.
-{% highlight java%}
+5.	Run HsqlDB client and make sure data is populated into ‘data’ table.<br/>
+{% highlight java %}
 mvn os:hsql-ui
 select * from PERSON;
 {% endhighlight %}
@@ -95,9 +95,11 @@ Here is an example of Kafka Space Synchronization Endpoint configuration:
 Please consult Kafka documentation for the full list of available producer properties.
 The default properties applied to Kafka producer are the following:
 
-Property	Default value	Description
-key.serializer.class	com.epam.openspaces.persistency.kafka.protocol.impl.serializer. KafkaMessageKeyEncoder	Message key serializer of default Gigaspace-Kafka protocol
-serializer.class	com.epam.openspaces.persistency.kafka.protocol.impl.serializer. KafkaMessageEncoder	Message serializer of default Gigaspace-Kafka protocol
+{: .table .table-bordered}
+|Property|Default value|Description|
+|:------|:----------|:-------|
+|key.serializer.class|com.epam.openspaces.persistency.kafka.protocol.impl.serializer.KafkaMessageKeyEncoder|Message key serializer of default Gigaspace-Kafka protocol|
+|serializer.class|com.epam.openspaces.persistency.kafka.protocol.impl.serializer.KafkaMessageEncoder|Message serializer of default Gigaspace-Kafka protocol|
 
 These default properties could be overridden if there is a need to customize GigaSpace-Kafka protocol. See Customization section below for details.
 
@@ -105,7 +107,7 @@ These default properties could be overridden if there is a need to customize Gig
 
 In order to associate Kafka topic with domain model class, class should be annotated with @KafkaTopic annotation and marked as Serializable. Here is an example
 
-{% highlight java%}
+{% highlight java %}
 @KafkaTopic("user_activity")
 @SpaceClass
 public class UserActivity implements Serializable {
@@ -119,7 +121,7 @@ To configure Kafka topic for SpaceDocuments or Extended SpaceDocument, the prope
 
 public class Product extends SpaceDocument {
   
-{% highlight java%}
+{% highlight java %}
 public Product() {
 	super("Product");
 	super.setProperty(SPACE_DOCUMENT_KAFKA_TOPIC_PROPERTY_NAME, "product");
