@@ -98,7 +98,7 @@ The default properties applied to Kafka producer are the following:
 
 {: .table .table-bordered}
 |Property|Default value|Description|
-|:------|:----------|:-------|
+|:-------|:------------|:----------|
 |key.serializer.class|com.epam.openspaces.persistency.kafka.protocol.impl.serializer.KafkaMessageKeyEncoder|Message key serializer of default Gigaspace-Kafka protocol|
 |serializer.class|com.epam.openspaces.persistency.kafka.protocol.impl.serializer.KafkaMessageEncoder|Message serializer of default Gigaspace-Kafka protocol|
 
@@ -118,7 +118,7 @@ public class UserActivity implements Serializable {
 
 ## Space Documents
 
-To configure Kafka topic for SpaceDocuments or Extended SpaceDocument, the property KafkaPersistenceConstants.SPACE_DOCUMENT_KAFKA_TOPIC_PROPERTY_NAME should be added to document. Here is an example
+To configure Kafka topic for SpaceDocuments or Extended SpaceDocument, the property `KafkaPersistenceConstants.SPACE_DOCUMENT_KAFKA_TOPIC_PROPERTY_NAME` should be added to document. Here is an example
 
 public class Product extends SpaceDocument {
   
@@ -140,12 +140,12 @@ You may configure the name of the property which defines the Kafka topic for Spa
 
 ## Kafka consumers
 
-Kafka persistence library provides a wrapper around native Kafka Consumer API to preset configuration responsible for GigaSpace-Kafka protocol serialization. Please see com.epam.openspaces.persistency.kafka.consumer.KafkaConsumer, example of how to use it could be found in <project_root>/example module.
+Kafka persistence library provides a wrapper around native Kafka Consumer API to preset configuration responsible for GigaSpace-Kafka protocol serialization. Please see `com.epam.openspaces.persistency.kafka.consumer.KafkaConsumer`, example of how to use it could be found in `<project_root>/example` module.
 
 ##Customization
 
 - Kafka persistence was designed to be extensible and customizable. 
-- If you need to create a custom protocol between GigaSpace and Kafka, provide an implementation of AbstractKafkaMessage, AbstractKafkaMessageKey, AbstractKafkaMessageFactory.
-- If you would like to customize how data sync operations are sent to Kafka or how Kafka topic is chosen for given entity, provide an implement of AbstractKafkaSpaceSynchronizationEndpoint.
-- If you want to create a custom serializer, look at KafkaMessageDecoder and KafkaMessageKeyDecoder.
-Kafka Producer client (which is used under the hood) could be configured with a number of settings, see Kafka documentation.
+- If you need to create a custom protocol between GigaSpace and Kafka, provide an implementation of `AbstractKafkaMessage`, `AbstractKafkaMessageKey`, `AbstractKafkaMessageFactory`.
+- If you would like to customize how data sync operations are sent to Kafka or how Kafka topic is chosen for given entity, provide an implement of `AbstractKafkaSpaceSynchronizationEndpoint`.
+- If you want to create a custom serializer, look at `KafkaMessageDecoder` and `KafkaMessageKeyDecoder`.
+- Kafka Producer client (which is used under the hood) could be configured with a number of settings, see Kafka documentation.
