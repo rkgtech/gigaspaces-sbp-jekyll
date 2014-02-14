@@ -1,4 +1,4 @@
----
+﻿---
 layout: post
 title:  GigaSpaces XAP Kafka integration
 categories: SBP
