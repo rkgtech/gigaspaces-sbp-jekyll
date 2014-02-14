@@ -16,7 +16,7 @@ weight: 50
 
 # Introduction
 
-Apache Kafka is a distributed publish-subscribe messaging system. It is designed to support persistent messaging with O(1) disk structures that provide constant time performance even with many TB of stored messages.
+[Apache Kafka](http://kafka.apache.org) is a distributed publish-subscribe messaging system. It is designed to support persistent messaging with O(1) disk structures that provide constant time performance even with many TB of stored messages.
 Apache Kafka provides High-throughput - even with very modest hardware, Kafka can support hundreds of thousands of messages per second. Apache Kafka support partitioning the messages over Kafka servers and distributing consumption over a cluster of consumer machines while maintaining per-partition ordering semantics. Apache Kafka used many tmes to perform data parallel load into Hadoop.
 
 This best practive is aimed to integrate GigaSpaces with Apache Kafka. GigaSpaces write-behind the IMDG operations to Kafka making it available for the subscribors. Such could be Hadoop or other data warehousing systems using the data for reporting and processing.
@@ -25,12 +25,18 @@ This best practive is aimed to integrate GigaSpaces with Apache Kafka. GigaSpace
 
 The XAP Kafka integration implementated via the `SpaceSynchronizationEndpoint` interface deployed as a Mirror service PU. It consume a batch of IMDG operations, converts them to a custom Kafka messages and sends these to Kafka server using the Kafka Producer API.
 
+{% indent %}
+![xap-kafka.jpg](/pics/xap-kafka.jpg)
+{% endindent %}
+
 GigaSpace-Kafka protocol is simple and represents the data and its IMDG operation. The message consists of the IMDG operation type (Write, Update , remove, etc.) and the actual data object. The Data object itself could be represented either as a single object or as a Document with key/values pairs (`SpaceDocument`). Since a kafka message should be sent over the wire, it should be serialized to bytes in some way. The default encoder utilizes Java serialization mechanism which implies Space classes (domain model) to be `Serializable`.
 
 By default Kafka messages are uniformly distributed across Kafka partitions. Please note, even though IMDG operations appear ordered in `SpaceSynchronizationEndpoint`, it doesn't imply correct ordering of data processing in Kafka consumers. See below diagram:
 
 # Getting started
+
 ## Download the Kafka Example
+
 The example application located in `<project_root>/example`. It demonstrates how to configure Kafka persistence and implement a simple Kafka consumer to pull data from Kafka and store in HsqlDB.
 
 ## Running the Example
@@ -98,7 +104,7 @@ The default properties applied to Kafka producer are the following:
 
 {: .table .table-bordered}
 |Property|Default value|Description|
-|:------|:----------|:-------|
+|:-------|:------------|:----------|
 |key.serializer.class|com.epam.openspaces.persistency.kafka.protocol.impl.serializer.KafkaMessageKeyEncoder|Message key serializer of default Gigaspace-Kafka protocol|
 |serializer.class|com.epam.openspaces.persistency.kafka.protocol.impl.serializer.KafkaMessageEncoder|Message serializer of default Gigaspace-Kafka protocol|
 
@@ -106,7 +112,7 @@ These default properties could be overridden if there is a need to customize Gig
 
 ## Space class
 
-In order to associate Kafka topic with domain model class, class should be annotated with @KafkaTopic annotation and marked as Serializable. Here is an example
+In order to associate Kafka topic with domain model class, class should be annotated with `@KafkaTopic` annotation and marked as `Serializable`. Here is an example
 
 {% highlight java %}
 @KafkaTopic("user_activity")
@@ -118,18 +124,18 @@ public class UserActivity implements Serializable {
 
 ## Space Documents
 
-To configure Kafka topic for SpaceDocuments or Extended SpaceDocument, the property KafkaPersistenceConstants.SPACE_DOCUMENT_KAFKA_TOPIC_PROPERTY_NAME should be added to document. Here is an example
-
-public class Product extends SpaceDocument {
+To configure Kafka topic for SpaceDocuments or Extended SpaceDocument, the property `KafkaPersistenceConstants.SPACE_DOCUMENT_KAFKA_TOPIC_PROPERTY_NAME` should be added to document. Here is an example
 
 {% highlight java %}
+public class Product extends SpaceDocument {
+
 public Product() {
 	super("Product");
 	super.setProperty(SPACE_DOCUMENT_KAFKA_TOPIC_PROPERTY_NAME, "product");
 }
 {% endhighlight %}
 
-It's also possible to configure name of the property which defines the Kafka topic for SpaceDocuments. Set spaceDocumentKafkaTopicName to the desired value as shown below.
+It's also possible to configure name of the property which defines the Kafka topic for SpaceDocuments. Set `spaceDocumentKafkaTopicName` to the desired value as shown below.
 
 {% highlight xml %}
 <bean id="kafkaSpaceSynchronizationEndpoint" class="com.epam.openspaces.persistency.kafka.KafkaSpaceSynchrspaceDocumentKafkaTopicNameonizationEndpointFactoryBean">
@@ -140,12 +146,12 @@ It's also possible to configure name of the property which defines the Kafka top
 
 ## Kafka consumers
 
-Kafka persistence library provides a wrapper around native Kafka Consumer API to preset configuration responsible for GigaSpace-Kafka protocol serialization. Please see com.epam.openspaces.persistency.kafka.consumer.KafkaConsumer, example of how to use it could be found in <project_root>/example module.
+Kafka persistence library provides a wrapper around native Kafka Consumer API to preset configuration responsible for GigaSpace-Kafka protocol serialization. Please see `com.epam.openspaces.persistency.kafka.consumer.KafkaConsumer`, example of how to use it could be found in `<project_root>/example module`.
 
 ##Customization
 
 - Kafka persistence was designed to be extensible and customizable.
-- If you need to create a custom protocol between GigaSpace and Kafka, provide an implementation of AbstractKafkaMessage, AbstractKafkaMessageKey, AbstractKafkaMessageFactory.
-- If you would like to customize how data sync operations are sent to Kafka or how Kafka topic is chosen for given entity, provide an implement of AbstractKafkaSpaceSynchronizationEndpoint.
-- If you want to create a custom serializer, look at KafkaMessageDecoder and KafkaMessageKeyDecoder.
-Kafka Producer client (which is used under the hood) could be configured with a number of settings, see Kafka documentation.
+- If you need to create a custom protocol between GigaSpace and Kafka, provide an implementation of `AbstractKafkaMessage`, `AbstractKafkaMessageKey`, `AbstractKafkaMessageFactory`.
+- If you would like to customize how data grid operations are sent to Kafka or how Kafka topic is chosen for given entity, provide an implement of 'AbstractKafkaSpaceSynchronizationEndpoint'.
+- If you want to create a custom serializer, look at `KafkaMessageDecoder` and `KafkaMessageKeyDecoder`.
+- Kafka Producer client (which is used under the hood) could be configured with a number of settings, see Kafka documentation.
