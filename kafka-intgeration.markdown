@@ -35,8 +35,10 @@ The example application located in `<project_root>/example`. It demonstrates how
 In order to run an example, please follow the instruction below:
 1.	Install Kafka<br/>
 2.	Start Zookeeper and Kafka server<br/>
+{% highlight java %}
 bin/zookeeper-server-start.sh config/zookeeper.properties
 bin/kafka-list-topic.sh --zookeeper localhost:2181
+{% endhighlight %}
 3.	Build project<br/>
 {% highlight java %}
 cd <project_root>
