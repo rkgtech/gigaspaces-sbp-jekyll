@@ -33,6 +33,7 @@ The XAP Kafka integration implementated via the `SpaceSynchronizationEndpoint` i
 GigaSpace-Kafka protocol is simple and represents the data and its IMDG operation. The message consists of the IMDG operation type (Write, Update , remove, etc.) and the actual data object. The Data object itself could be represented either as a single object or as a Document with key/values pairs (`SpaceDocument`). Since a kafka message should be sent over the wire, it should be serialized to bytes in some way. The default encoder utilizes Java serialization mechanism which implies Space classes (domain model) to be `Serializable`.
 
 By default Kafka messages are uniformly distributed across Kafka partitions. Please note, even though IMDG operations appear ordered in `SpaceSynchronizationEndpoint`, it doesn't imply correct ordering of data processing in Kafka consumers. See below diagram:
+
 {% indent %}
 ![xap-kafka-ordering.jpg](/attachment_files/sbp/xap-kafka-ordering.jpg)
 {% endindent %}
