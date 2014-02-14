@@ -14,8 +14,7 @@ weight: 1000
 {% endtip %}
 
 # Introduction 
-
-Apache Kafka is a distributed publish-subscribe messaging system. It is designed to support persistent messaging with O(1) disk structures that provide constant time performance even with many TB of stored messages.
+[Apache Kafka](http://kafka.apache.org/) is a distributed publish-subscribe messaging system. It is designed to support persistent messaging with O(1) disk structures that provide constant time performance even with many TB of stored messages.
 Apache Kafka provides High-throughput - even with very modest hardware, Kafka can support hundreds of thousands of messages per second. Apache Kafka support partitioning the messages over Kafka servers and distributing consumption over a cluster of consumer machines while maintaining per-partition ordering semantics. Apache Kafka used many tmes to perform data parallel load into Hadoop.
 
 This best practive is aimed to integrate GigaSpaces with Apache Kafka. GigaSpaces write-behind the IMDG operations to Kafka making it available for the subscribors. Such could be Hadoop or other data warehousing systems using the data for reporting and processing.
@@ -26,7 +25,7 @@ The XAP Kafka integration implementated via the `SpaceSynchronizationEndpoint` i
 
 GigaSpace-Kafka protocol is simple and represents the data and its IMDG operation. The message consists of the IMDG operation type (Write, Update , remove, etc.) and the actual data object. The Data object itself could be represented either as a single object or as a Document with key/values pairs (`SpaceDocument`). Since a kafka message should be sent over the wire, it should be serialized to bytes in some way. The default encoder utilizes Java serialization mechanism which implies Space classes (domain model) to be `Serializable`. 
 
-By default Kafka messages are uniformly distributed across Kafka partitions. Please note, even though IMDG operations appear ordered in `SpaceSynchronizationEndpoint`, it doesn’t imply correct ordering of data processing in Kafka consumers. See below diagram:
+By default Kafka messages are uniformly distributed across Kafka partitions. Please note, even though IMDG operations appear ordered in `SpaceSynchronizationEndpoint`, it doesn't imply correct ordering of data processing in Kafka consumers. See below diagram:
 
 # Getting started 
 ## Download the Kafka Example
@@ -48,7 +47,7 @@ mvn clean install
 cd example
 mvn os:deploy
 {% endhighlight %}
-5.	Run HsqlDB client and make sure data is populated into ‘data’ table.<br/>
+5.	Run HsqlDB client and make sure data is populated into the database table.<br/>
 {% highlight java %}
 mvn os:hsql-ui
 select * from PERSON;
@@ -128,7 +127,7 @@ public Product() {
 }
 {% endhighlight %}
 
-It’s also possible to configure name of the property which defines the Kafka topic for SpaceDocuments. Set spaceDocumentKafkaTopicName to the desired value as shown below.
+You may configure the name of the property which defines the Kafka topic for SpaceDocuments. Set `spaceDocumentKafkaTopicName` to the desired value as shown below.
 
 {% highlight xml %}
 <bean id="kafkaSpaceSynchronizationEndpoint" class="com.epam.openspaces.persistency.kafka.KafkaSpaceSynchrspaceDocumentKafkaTopicNameonizationEndpointFactoryBean">
