@@ -26,7 +26,7 @@ This best practive is aimed to integrate GigaSpaces with Apache Kafka. GigaSpace
 The XAP Kafka integration implementated via the `SpaceSynchronizationEndpoint` interface deployed as a Mirror service PU. It consume a batch of IMDG operations, converts them to a custom Kafka messages and sends these to Kafka server using the Kafka Producer API.
 
 {% indent %}
-![/pics/xap-kafka.jpg](/pics/xap-kafka.jpg)
+![xap-kafka.jpg](/attachment_files/sbp/xap-kafka.jpg)
 {% endindent %}
 
 
@@ -34,7 +34,7 @@ GigaSpace-Kafka protocol is simple and represents the data and its IMDG operatio
 
 By default Kafka messages are uniformly distributed across Kafka partitions. Please note, even though IMDG operations appear ordered in `SpaceSynchronizationEndpoint`, it doesn't imply correct ordering of data processing in Kafka consumers. See below diagram:
 {% indent %}
-![/pics/xap-kafka-ordering.jpg](/pics/xap-kafka-ordering.jpg)
+![xap-kafka-ordering.jpg](/attachment_files/sbp/xap-kafka-ordering.jpg)
 {% endindent %}
 
 # Getting started
