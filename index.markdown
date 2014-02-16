@@ -32,6 +32,7 @@ This section contains GigaSpaces usage patterns, best practices and solutions. E
 |[Schema Evolution](./schema-evolution.html)| Advanced | Leveraging different techniques to enhance the application data model without IMDG downtime.|
 |[Scala Integration](./scala-integration.html) | Advanced| Common Scala integration scenarios on top of XAP. |
 |[Distributed Bitmap](./distributed-bitmap.html) | Advanced| Use XAP to distribute a bitmap across a partitioned cluster. |
+|[Modeling your data](./modeling-your-data.html) | Beginner| Moving from a centralized to a distributed data store. |
 
 
 

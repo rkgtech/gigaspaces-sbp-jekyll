@@ -6,14 +6,14 @@ parent: data-access-patterns.html
 weight: 1700
 ---
 
-{% compositionsetup %}
 
-{% summary %}Space object modelling basic rules.{% endsummary %}
-
+{% tip %}
+**Summary:** Space object modelling basic rules.<br/>
 **Author**: Shay Hassidim, Deputy CTO, GigaSpaces<br/>
-Using XAP:**7.0GA**<br/>
-JDK:**Sun JDK 1.6**<br/>
-Date: October  2009<br/>
+**Recently tested with GigaSpaces version**: XAP 7.1<br/>
+**Last Update:** October  2009<br/>
+{% endtip %}
+
 
 When constructing the space classes and their relationship, and having persistency turned on, you should design the space classes to follow a few basic rules. The rules are mostly relevant when having associations between different objects, and when the database tables include foreign and primary key relations that need to be mapped to objects in memory.
 
