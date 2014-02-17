@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  GigaSpaces Integration with Kafka
+title:  XAP Integration with Kafka
 categories: SBP
 parent: data-access-patterns.html
 weight: 50
@@ -44,9 +44,10 @@ By default Kafka messages are uniformly distributed across Kafka partitions. Ple
 
 ## Download the Kafka Example
 
-You can download the example code from [here](/download_files/sbp/kafka-integration.tar)
+You can download the example code from [here](/download_files/sbp/kafka-integration.tar).
+UNzip into an empty folder.
 
-The example application is located under `<project_root>/example`. It demonstrates how to configure Kafka persistence and implements a simple Kafka consumer to pull data from Kafka and store in HsqlDB.
+The example located under `<project_root>/example`. It demonstrates how to configure Kafka persistence and implements a simple Kafka consumer pulling data from Kafka and store in HsqlDB.
 
 ## Running the Example
 In order to run an example, please follow the instruction below:
