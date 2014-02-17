@@ -8,7 +8,7 @@ weight: 50
 
 {% summary page %}This best practice explains how to use Kafka with XAP.{% endsummary %}
  {% tip %}
- **Author**:  Oleksiy Dyagilev<br/>
+ **Author**:Oleksiy Dyagilev<br/>
  **Recently tested with GigaSpaces version**: XAP 9.6<br/>
  **Last Update:** Feb 2014<br/>
 
@@ -55,7 +55,7 @@ In order to run an example, please follow the instruction below:
 Step 1: Install Kafka<br/>
 
 Step 2:	Start Zookeeper and Kafka server<br/>
-bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/zookeeper-server-start.sh config/zookeeper.properties{%wbr%}
 bin/kafka-list-topic.sh --zookeeper localhost:2181
 
 Step 3:	Build project<br/>
@@ -70,11 +70,7 @@ cd example
 mvn os:deploy
 {% endhighlight %}
 
-Step 5:	Run HsqlDB client and make sure data is populated into `data` table.<br/>
-{% highlight java %}
-mvn os:hsql-ui
-select * from PERSON;
-{% endhighlight %}
+Step 5:	Check GigaSpaces log files, there should be messages from the Feeder and Consumer.
 
 # Configuration
 
