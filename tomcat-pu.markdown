@@ -96,9 +96,9 @@ Step 4:	(optional) Specify the SLA parameters for fault isolation and redundancy
 {: .table .table-bordered}
 |Setting|	SLA Directive|
 |:--------|:-----------|
-|Maximum of one Tomcat instance per JVM|<os-sla:sla max-instances-per-vm="1" />|
-|Maximum of one Tomcat instance per physical machine|	<os-sla:sla max-instances-per-machine="1" />|
-|Maximum of one Tomcat instance per zone (sets of machines or availability zone)|	<os-sla:sla max-instances-per-zone="1" />|
+|Maximum of one Tomcat instance per JVM|`<os-sla:sla max-instances-per-vm="1" />`|
+|Maximum of one Tomcat instance per physical machine|`<os-sla:sla max-instances-per-machine="1" />`|
+|Maximum of one Tomcat instance per zone (sets of machines or availability zone)|`<os-sla:sla max-instances-per-zone="1" />`|
 
 
 Step 5:	Build the project through mvn package{%wbr%}
