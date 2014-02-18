@@ -57,6 +57,7 @@ This section contains GigaSpaces usage patterns, best practices and solutions. E
 {: .table .table-bordered}
 | Best Practice | Level | Description |
 |:--------------|:------|:------------|
+|[Embedding Tomcat as a Web Container](./tomcat-pu.html)| Beginner | This article presents embedding Tomcat 7 within the XAP data grid|
 |[Embedding XAP for OEMs](./embedding-xap-for-oems.html)| Beginner | A quick and simple example of how an OEM might embed GigaSpaces XAP for customer use.|
 |[Universal Deployer](./universal-deployer.html) |Beginner | Allows deploying composite applications. Support multiple processing unit dependency based deployment.|
 |[Data-Collocation Deployment Topology](./data-collocation-deployment-topology.html)| Beginner | Considerations which topology to choose when deploying both business logic and data into the Grid.|

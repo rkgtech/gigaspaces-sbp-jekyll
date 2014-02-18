@@ -45,7 +45,7 @@ By default Kafka messages are uniformly distributed across Kafka partitions. Ple
 ## Download the Kafka Example
 
 You can download the example code from [here](/download_files/sbp/kafka-integration.tar).
-UNzip into an empty folder.
+Unzip into an empty folder.
 
 The example located under `<project_root>/example`. It demonstrates how to configure Kafka persistence and implements a simple Kafka consumer pulling data from Kafka and store in HsqlDB.
 
