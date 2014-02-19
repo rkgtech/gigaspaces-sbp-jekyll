@@ -19,7 +19,7 @@ weight: 100
 
 # Overview
 
-GigaSpaces XAP provides a powerful IMDG with advanced data access options. Many times a simple key/value interface required to access the IMDG. The most popular one is the Map API. GigaSpaces main data access API is the `GigaSpace` interface. A simple wrapper around it described here exposing `Map` API.
+GigaSpaces XAP provides a powerful IMDG with advanced data access options. Many times a simple key/value interface required to access the IMDG. The most popular one is the Map API. GigaSpaces main data access API is the [GigaSpace Interface]({%latestjavaurl%}/the-gigaspace-interface.html). A simple wrapper around it described here exposing a `HashMap` interface.
 
 ![cache-service.jpg](/attachment_files/sbp/cache-service.jpg)
 
@@ -89,10 +89,13 @@ public Object getValue() {
 {% endhighlight %}
 
 ## The CacheService
-The `CacheService` leveraging the `GigaSpace` interface implementing the standard `put`,`get`,`remove`,etc. methods:
+The `CacheService` leveraging the `GigaSpace` interface implementing the standard `put`,`get`,`putAll`,`getAll`,`remove`,etc. methods:
 {% highlight java %}
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -101,7 +104,9 @@ import org.openspaces.core.GigaSpaceConfigurer;
 import org.openspaces.core.space.UrlSpaceConfigurer;
 import org.openspaces.core.space.cache.LocalViewSpaceConfigurer;
 
+import com.gigaspaces.client.ReadByIdsResult;
 import com.gigaspaces.query.IdQuery;
+import com.gigaspaces.query.IdsQuery;
 import com.j_spaces.core.client.SQLQuery;
 
 public class CacheService {
@@ -137,7 +142,7 @@ public class CacheService {
 	public void put(String key, Object value) throws Exception {
 		put(null, key, value);
 	}
-
+	
 	public void put(String region, String key, Object value) throws Exception {
 		Data d = new Data();
 		d.setKey(key);
@@ -197,6 +202,21 @@ public class CacheService {
 		return spaceView.count(templ);
 	}
 
+	public Map<String, Object> getAll(List<String> keys) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String keysArray[] = new String[keys.size()];
+		keys.toArray(keysArray);
+		IdsQuery<Data> idsquery = new IdsQuery<Data>(Data.class, keysArray);
+		ReadByIdsResult<Data> result= spaceView.readByIds(idsquery);
+		Iterator<Data> iter = result.iterator();
+		while (iter.hasNext())
+		{
+			Data data = iter.next();
+			map.put(data.getKey(), data.getValue());
+		}
+		return map;
+	}
+	
 	public void putAll(String region, Map<String, Object> map) {
 		Data d[] = new Data[map.size()];
 		int count = 0;
@@ -216,6 +236,23 @@ public class CacheService {
 	public void putAll(Map<String, Object> map) {
 		putAll(null, map);
 	}
+
+	 public Collection<Object> values() {
+			SQLQuery<Data> query = null;
+			Set<Object> values = new HashSet<Object>();
+			if (localView)
+				query = new SQLQuery<Data>(Data.class, "");
+			else
+				query = new SQLQuery<Data>(Data.class, "").setProjections("value");
+
+			Data d[] = spaceView.readMultiple(query);
+
+			for (int i = 0; i < d.length; i++) {
+				values.add(d[i].getValue());
+			}
+			return values;
+
+	 }
 
 	public Set<String> keySet() throws Exception {
 		SQLQuery<Data> query = null;
