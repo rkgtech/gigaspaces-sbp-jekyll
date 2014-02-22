@@ -187,6 +187,9 @@ gs deploy -cluster schema=async_replicated total_members=2 tomcat-pu-1.0-SNAPSHO
 The `pu.xml` should include:
 {%highlight xml%}
 <beans 
+
+	<bean id="tomcat7" class="com.gigaspaces.tomcat.Tomcat7">
+....
 	<os-core:space id="space" url="jini://*/*/space" />
 	<os-core:local-cache id="localCacheSpace" space="space">
 		<os-core:properties>
