@@ -145,6 +145,79 @@ The following table shows which user controlled locations end up in which class 
 |Webapp	| \[PU\]/webapps/WEB-INF/classes, \[PU\]/webapps/WEB-INF/lib/*.jar|
 
 
+# Tomcat Cluster with a Data Grid Deployment
+
+See below for different options deploying Tomcat cluster with an embedded data grid or Tomcat cluster using a local cache with Remote data grid:
+
+## Deploying Two nodes Tomcat Cluster with an Embedded Sync-replicated Data-Grid
+The `pu.xml` should include:
+{%highlight xml%}
+<beans 
+	<bean id="tomcat7" class="com.gigaspaces.tomcat.Tomcat7">
+....
+	<os-core:space id="space" url="/./space" />
+</beans>
+{%endhighlight%}
+
+Tomcat Cluster Deploy command:
+{%highlight xml%}
+gs deploy -cluster schema=sync_replicated total_members=2 tomcat-pu-1.0-SNAPSHOT
+{%endhighlight%}
+
+
+## Deploying Two nodes Tomcat Cluster with an Embedded ASync-replicated Data-Grid
+
+The `pu.xml` should include:
+{%highlight xml%}
+<beans 
+	<bean id="tomcat7" class="com.gigaspaces.tomcat.Tomcat7">
+....
+	<os-core:space id="space" url="/./space" />
+</beans>
+{%endhighlight%}
+
+Tomcat Cluster Deploy command:
+{%highlight xml%}
+gs deploy -cluster schema=async_replicated total_members=2 tomcat-pu-1.0-SNAPSHOT
+{%endhighlight%}
+
+
+## Deploying Two nodes Tomcat Cluster with a Local-cache Communicating with a Remote Data-Grid
+
+The `pu.xml` should include:
+{%highlight xml%}
+<beans 
+	<os-core:space id="space" url="jini://*/*/space" />
+	<os-core:local-cache id="localCacheSpace" space="space">
+		<os-core:properties>
+		<props>
+			<prop key="space-config.engine.cache_size">5000000</prop>
+			<prop key="space-config.engine.memory_usage.high_watermark_percentage">75</prop>
+			<prop key="space-config.engine.memory_usage.write_only_block_percentage">73</prop>
+			<prop key="space-config.engine.memory_usage.write_only_check_percentage">71</prop>
+			<prop key="space-config.engine.memory_usage.low_watermark_percentage">50</prop>
+			<prop key="space-config.engine.memory_usage.eviction_batch_size">1000</prop>
+			<prop key="space-config.engine.memory_usage.retry_count">20</prop>
+			<prop key="space-config.engine.memory_usage.explicit">false</prop>
+			<prop key="space-config.engine.memory_usage.retry_yield_time">200</prop>
+		</props>
+		</os-core:properties>
+	</os-core:local-cache>
+
+	<os-core:giga-space id="localCache" space="localCacheSpace"/>
+</beans>
+{%endhighlight%}
+
+Data Grid Deploy command:
+{%highlight xml%}
+deploy-space -cluster schema=partitioned-sync2backup total_members=2,1 space
+{%endhighlight%}
+
+Tomcat Cluster Deploy command:
+{%highlight xml%}
+gs deploy -cluster total_members=2 tomcat-pu-1.0-SNAPSHOT
+{%endhighlight%}
+
 # Elastic Load Balancer
 
 Implementing automatic updates of load balancer tables can be done through the combination of the Admin API for monitoring the processing unit instances. A similar best practice is available through the [Apache Load Balancer processing unit](./web-load-balancer-agent-pu.html).
