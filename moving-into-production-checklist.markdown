@@ -60,7 +60,7 @@ GigaSpaces uses TCP/IP for most of its remote operations. The following componen
 {: .table .table-bordered}
 | Service | Description | Configuration Property | Default value |Comment|
 |:--------|:------------|:-----------------------|:--------------|:------|
-|[Lookup Service listening port]({%latestjavaurl%}/the-lookup-service.html) |Used as part of the lookup discovery protocol.|`com.sun.jini.reggie.initialUnicastDiscoveryPort` System property|XAP 6: **4162**{% wbr %}XAP 7: **4164**{% wbr %}XAP 8: **4166**| |
+|[Lookup Service listening port](/product_overview/the-lookup-service.html) |Used as part of the lookup discovery protocol.|`com.sun.jini.reggie.initialUnicastDiscoveryPort` System property|XAP 6: **4162**{% wbr %}XAP 7: **4164**{% wbr %}XAP 8: **4166**| |
 |[LRMI listening port]({%latestjavaurl%}/communication-protocol.html)|Used with client-space and space-space communication. |`com.gs.transport_protocol.lrmi.bind-port` System property. |variable, random| |
 |RMI registry listening port |Used as an alternative directory service.| `com.gigaspaces.system.registryPort` System property|10098 and above.| |
 |Webster listening port|Internal web service used as part of the application deployment process. |`com.gigaspaces.start.httpPort` System property|9813| |
@@ -117,7 +117,7 @@ In some cases you might need to increase the LRMI Connection thread pool maximum
 {% endtip %}
 
 # Lookup Locators and Groups
-A space (or any other service, such as a GSC or GSM) publishes (or registers/exports) itself within the [Lookup Service]({%latestjavaurl%}/the-lookup-service.html). The lookup service acts as the system directory service. The lookup service (aka service proxy) keeps information about each service, such as its location and its exposed remote methods. Every client or service needs to discover a lookup service as part of its bootstrap process.
+A space (or any other service, such as a GSC or GSM) publishes (or registers/exports) itself within the [Lookup Service](/product_overview/the-lookup-service.html). The lookup service acts as the system directory service. The lookup service (aka service proxy) keeps information about each service, such as its location and its exposed remote methods. Every client or service needs to discover a lookup service as part of its bootstrap process.
 
 There are 2 main options for how to discover a lookup service:
 
@@ -152,7 +152,7 @@ In such a case, make sure clients have their lookup locators set correctly to ha
 {% endcomment %}
 
 ## Space URL Examples
-See below for examples of [Space URL]({%latestjavaurl%}/space-url.html)s you should be familiar with:
+See below for examples of [Space URL]({%latestjavaurl%}/the-space-configuration.html) you should be familiar with:
 
 - "jini://localhost/*/space" - this space URL means that the client is trying to discover the lookup service on the localhost, together with discovering it on the network via multicast (enabled by default).
 
@@ -194,7 +194,7 @@ Here is a simple confguration you should place within your pu.xml to disable the
 {% endhighlight %}
 
 # The Runtime Environment - GSA, LUS, GSM and GSCs
-In a dynamic environment where you want to start [GSCs]({%latestjavaurl%}/service-grid.html#gsc) and [GSM]({%latestjavaurl%}/service-grid.html#gsm) remotely, manually or dynamically, the [GSA]({%latestjavaurl%}/service-grid.html#gsa) is the only component you should have running on the machine that is hosting the [GigaSpaces runtime environment]({%latestjavaurl%}/the-runtime-environment.html). This lightweight service acts as an agent and starts a GSC/GSM/LUS when needed.
+In a dynamic environment where you want to start [GSCs](/product_overview/service-grid.html#gsc) and [GSM](/product_overview/service-grid.html#gsm) remotely, manually or dynamically, the [GSA](/product_overview/service-grid.html#gsa) is the only component you should have running on the machine that is hosting the [GigaSpaces runtime environment]({%latestjavaurl%}/the-runtime-environment.html). This lightweight service acts as an agent and starts a GSC/GSM/LUS when needed.
 
 You should plan the initial number of GSCs and GSMs based on the application memory footprint, and the amount of processing you might need. The most basic deployment should include 2 GSMs (running on different machines), 2 Lookup services (running on different machines), and 2 GSCs (running on each machine). These host your Data-Grid or any other application components (services, web servers, Mirror) that you deploy.
 
@@ -649,7 +649,7 @@ GigaSpaces generates some files while the system is running. You should change t
 |`user.home`|The location of system defaults config. Used by the GS-UI, and runtime system components.| |
 |`com.gigaspaces.lib.platform.ext` | PUs shared classloader libraries folder. PU jars located within this folder loaded once into the **JVM system classloader** and shared between all the PU instnaces classloaders within the GSC. In most cases this is a better option than the `com.gs.pu-common` for JDBC drivers and other 3rd party libraries. This is useful option when you  want multiple processing units to share the same 3rd party jar files and do not want to repackage the processing unit jar whenever one of these 3rd party jars changes.| `<gigaspaces-xap root>\lib\platform\ext`|
 |`com.gs.pu-common`|The location of common classes used across multiple processing units. The libraries located within this folder **loaded into each PU instance classloader** (and not into the system classloader as with the `com.gigaspaces.lib.platform.ext`. |`<gigaspaces-xap root>\lib\optional\pu-common`|
-|`com.gigaspaces.grid.gsa.config-directory`|The location of the GSA configuration files. [The GigaSpaces Agent]({%latestjavaurl%}/service-grid.html#gsa) (GSA) manages different process types. Each process type is defined within this folder in an xml file that identifies the process type by its name. |`<gigaspaces-xap root>\config\gsa`|
+|`com.gigaspaces.grid.gsa.config-directory`|The location of the GSA configuration files. [The GigaSpaces Agent](/product_overview/service-grid.html#gsa) (GSA) manages different process types. Each process type is defined within this folder in an xml file that identifies the process type by its name. |`<gigaspaces-xap root>\config\gsa`|
 |`java.util.logging.config.file`| It indicates file path to the Java logging file location. Use it to enable finest logging troubleshooting of various GigaSpaces Services. You may control this setting via the `GS_LOGGING_CONFIG_FILE_PROP` environment variable.| `<gigaspaces-xap root>\config\gs_logging.properties`|
 
 {% exclamation %} The `com.gigaspaces.lib.platform.ext` and the `com.gs.pu-common` are useful to decrease the deployment time in case your processing unit **contains a lot of 3rd party jars files**. In such case, each GSC will download the processing unit jar file (along with all the jars it depends on) to its local working directory from the GSM, and in case of large deployments spanning tens or hundreds of GSCs this can be quite time consuming. In such cases you should consider **placing the jars on which your processing unit depends on** in a shared location on your network, and then point the `com.gs.pu-common` or `com.gigaspaces.lib.platform.ext` directory to this location.

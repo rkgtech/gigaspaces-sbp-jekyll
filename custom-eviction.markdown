@@ -603,6 +603,6 @@ In cases where the Space is using [LRU]({%latestjavaurl%}/lru-cache-policy.html)
 In [ALL_IN_CACHE]({%latestjavaurl%}/all-in-cache-cache-policy.html) mode,
 
 - Take or clear operations will remove the data from space and database (in read-write mode), you should use
-    - Lease expiration option to remove the entries from the space and free up memory. When you restart the cluster, expired data will get loaded again and fill up the entire cluster. In order to avaoid this you have to propogate the lease information into the DB (using the [SpaceLease]({%latestjavaurl%}/pojo-metadata.html) property).
+    - Lease expiration option to remove the entries from the space and free up memory. When you restart the cluster, expired data will get loaded again and fill up the entire cluster. In order to avaoid this you have to propogate the lease information into the DB (using the [SpaceLease]({%latestjavaurl%}/modeling-your-data.html) property).
     Objects which are cleared from the space using Lease expiration are not loaded automatically when someone queries for them, you will need to build custom functionality to retrieve this data.
     - Custom EDS mechanism that intercepts the eviction requests and stops propogating them into DB.

@@ -150,6 +150,10 @@ The following table shows which user controlled locations end up in which class 
 See below for different options deploying Tomcat cluster with an embedded data grid or Tomcat cluster using a local cache with Remote data grid:
 
 ## Deploying Two nodes Tomcat Cluster with an Embedded Sync-replicated Data-Grid
+
+[<img src="/attachment_files/sbp/tomcat-deploy1.png" width="300" height="250">](/attachment_files/sbp/tomcat-deploy1.png)
+
+
 The `pu.xml` should include:
 {%highlight xml%}
 <beans 
@@ -183,6 +187,8 @@ gs deploy -cluster schema=async_replicated total_members=2 tomcat-pu-1.0-SNAPSHO
 
 
 ## Deploying Two nodes Tomcat Cluster with a Local-cache Communicating with a Remote Data-Grid
+
+[<img src="/attachment_files/sbp/tomcat-deploy2.png" width="300" height="250">](/attachment_files/sbp/tomcat-deploy2.png)
 
 The `pu.xml` should include:
 {%highlight xml%}

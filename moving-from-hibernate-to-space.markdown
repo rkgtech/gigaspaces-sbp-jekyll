@@ -520,7 +520,7 @@ To deploy the Data-Grid and the web Application into the [GigaSpaces runtime env
 
 - Download the [3rd party libraries](/attachment_files/sbp/3rd_party_libraries.zip) package, and extract it into the `\gigaspaces-xap\lib\optional\pu-common` folder.
 - Download the [application.war](/attachment_files/sbp/application.war) , [myDataGrid.jar](/attachment_files/sbp/myDataGrid.jar) and the [myMirror.jar](/attachment_files/sbp/myMirror.jar).
-- Start the [GigaSpaces agent]({%latestjavaurl%}/service-grid.html#gsa):
+- Start the [GigaSpaces agent](/product_overview/service-grid.html#gsa):
 On windows run the following command:
 
 {% highlight java %}
