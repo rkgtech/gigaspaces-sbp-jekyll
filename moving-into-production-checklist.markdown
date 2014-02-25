@@ -433,7 +433,7 @@ JDK 1.6 - CMS mode - good for low latency scnearios:
 -XX:+CMSClassUnloadingEnabled -XX:+CMSParallelRemarkEnabled
 {% endhighlight %}
 
-JDK 1.7 - g1 mode - good for low latency scnearios:
+JDK 1.7 - g1 mode - good for low latency scenarios:
 {% highlight java %}
 -server -Xms8g -Xmx8g -XX:+UseG1GC -XX:MaxGCPauseMillis=500 -XX:InitiatingHeapOccupancyPercent=50 -XX:+UseCompressedOops
 {% endhighlight %}
