@@ -17,7 +17,7 @@ weight: 800
 
 # Overview
 
-When having an application using a very large backend database leveraging the IMDG, caching a subset of the application data, while running on-going data eviction policy with read-through policy (i.e. LRU cache policy mode with External-Data-Source used), the main requirement is to **access the database in the most optimal manner** when performing queries against the IMDG.
+When having an application using a very large backend database leveraging the IMDG, caching a subset of the application data, while running on-going data eviction policy with read-through policy (i.e. LRU cache policy mode with an  External-Data-Source used), the main requirement is to **access the database in the most optimal manner** when performing queries against the IMDG.
 
 When using `readById` or `readByIds` operations looking for a single specific object(s), that cannot be found within the IMDG (a cache miss), the database access is very minimal. Only one raw is retrieved from the database per object lookup activity via the space External Data Source (EDS) implementation.
 
@@ -26,7 +26,7 @@ But when performing queries, using `readMultiple` with a template or SQLQuery fi
 - When using `readMultiple` having `Integer.MAX_VALUE` as the `max_objects` parameter, every partition will access the database (parallel database access). This may overload the database.
 - When using `readMultiple` having `max_objects` < `Integer.MAX_VALUE` the database might be accessed even if there are enough objects matching the query criteria across all the space partitions.
 - When loading data from database data eviction process may be triggered. This may impact the performance.
-- Database access involves reading objects that will not be loaded into the space (none matching routing value).
+- Database access involves reading objects that will not be loaded into the space (non-matching routing value).
 
 # Solution
 The main motivation with the solution proposed below, is to have better control when a space partition accessing the database. The space is inspected prior retrieving the data leveraging the ability to count matching objects to a given query very fast (via the in-memory indexes the space maintains). If there are adequate amount of matching objects, the client accessing the relevant space partition(s) and retrieving the data from the space without accessing the database.
