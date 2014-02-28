@@ -29,7 +29,7 @@ GigaSpaces XAP allows for embedding a Tomcat 7 web container within the service 
 {%endsection%}
 
 
-The key features of such integration are:
+The key features of the embedded Tomcat are:
 
 - Auto-Scaling: Dynamic allocation and auto-scaling of Tomcat instances (hosting a web application) as well as automatically updating your load balancer through the Admin API
 - Simplified Management: Consolidated management of your web tier along with your data grid under one common administrative interface (through a web, desktop, and CLI administrative interface)
@@ -163,7 +163,7 @@ The `pu.xml` should include:
 </beans>
 {%endhighlight%}
 
-Tomcat Cluster Deploy command:
+Tomcat Cluster with two instances embedded sync-replicated data-grid deploy command:
 {%highlight xml%}
 gs deploy -cluster schema=sync_replicated total_members=2 tomcat-pu-1.0-SNAPSHOT
 {%endhighlight%}
@@ -180,7 +180,7 @@ The `pu.xml` should include:
 </beans>
 {%endhighlight%}
 
-Tomcat Cluster Deploy command:
+Tomcat Cluster with two instances embedded async-replicated data-grid deploy command:
 {%highlight xml%}
 gs deploy -cluster schema=async_replicated total_members=2 tomcat-pu-1.0-SNAPSHOT
 {%endhighlight%}
@@ -217,12 +217,12 @@ The `pu.xml` should include:
 </beans>
 {%endhighlight%}
 
-Data Grid Deploy command:
+Data Grid (Two partitions with a sync-replicated backup) deploy command:
 {%highlight xml%}
-deploy-space -cluster schema=partitioned-sync2backup total_members=2,1 space
+gs deploy-space -cluster schema=partitioned-sync2backup total_members=2,1 space
 {%endhighlight%}
 
-Tomcat Cluster Deploy command:
+Tomcat Cluster deploy command:
 {%highlight xml%}
 gs deploy -cluster total_members=2 tomcat-pu-1.0-SNAPSHOT
 {%endhighlight%}
