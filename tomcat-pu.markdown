@@ -165,7 +165,7 @@ The `pu.xml` should include:
 
 Tomcat Cluster with two instances embedded sync-replicated data-grid deploy command:
 {%highlight xml%}
-gs deploy -cluster schema=sync_replicated total_members=2 tomcat-pu-1.0-SNAPSHOT
+gs deploy -cluster schema=sync_replicated total_members=2 tomcat-pu-1.0-SNAPSHOT.jar
 {%endhighlight%}
 
 
@@ -182,7 +182,7 @@ The `pu.xml` should include:
 
 Tomcat Cluster with two instances embedded async-replicated data-grid deploy command:
 {%highlight xml%}
-gs deploy -cluster schema=async_replicated total_members=2 tomcat-pu-1.0-SNAPSHOT
+gs deploy -cluster schema=async_replicated total_members=2 tomcat-pu-1.0-SNAPSHOT.jar
 {%endhighlight%}
 
 
@@ -224,7 +224,7 @@ gs deploy-space -cluster schema=partitioned-sync2backup total_members=2,1 space
 
 Tomcat Cluster deploy command:
 {%highlight xml%}
-gs deploy -cluster total_members=2 tomcat-pu-1.0-SNAPSHOT
+gs deploy -cluster total_members=2 tomcat-pu-1.0-SNAPSHOT.jar
 {%endhighlight%}
 
 # Elastic Load Balancer
