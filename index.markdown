@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Solutions and Patterns
+title:  Solutions, Patterns & Best Practices
 categories: SBP
 ---
 
