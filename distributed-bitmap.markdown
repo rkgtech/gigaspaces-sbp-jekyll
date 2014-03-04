@@ -159,7 +159,7 @@ return ret;
 {%endhighlight%}
 
 
-The service implementation permits the operations on the bitmap to be conducted in terms of integers. If I wish to set or check the bit corresponding to integer 123456, I can simply call the proper method on the service and all is good. Note that the {{readById}} calls are using the space id as the routing id. This is merely safe programming, but we wouldn't want these calls to actually reference pages in other partitions. In order to ensure that pages are not fetched from other partitions (potentially resulting in a performance diminishing network hop), the service proxy should be constructed carefully:
+The service implementation permits the operations on the bitmap to be conducted in terms of integers. If I wish to set or check the bit corresponding to integer 123456, I can simply call the proper method on the service and all is good. Note that the `readById` calls are using the space id as the routing id. This is merely safe programming, but we wouldn't want these calls to actually reference pages in other partitions. In order to ensure that pages are not fetched from other partitions (potentially resulting in a performance diminishing network hop), the service proxy should be constructed carefully:
 
 
 {%highlight java%}
@@ -177,7 +177,7 @@ boolean res=svc.set(1);
 {%endhighlight %}
 
 
-Note that when the service proxy is constructed on the client side, the {{getPageId}} utility method mentioned previously is called to fetch the target page id (and therefore routing id) of the page requested.
+Note that when the service proxy is constructed on the client side, the `getPageId` utility method mentioned previously is called to fetch the target page id (and therefore routing id) of the page requested.
 
 # Conclusion
 

@@ -86,7 +86,7 @@ weight: 1250
 
 
 ### Prepare the db demo files
- Change directory to the db2mqrep directory. We'll execute a script that creates the db2sampl database PUBSRC and configures it for this demo. Execute the script {{democreatedb.sh}} using the command from a terminal window:
+ Change directory to the db2mqrep directory. We'll execute a script that creates the db2sampl database PUBSRC and configures it for this demo. Execute the script `democreatedb.sh` using the command from a terminal window:
 
 
 {%highlight java%}
@@ -142,7 +142,7 @@ weight: 1250
  ..........
  {%endhighlight%}
 
- To setup the asnclp session to replicate, execute the file {{demopub.asnclp}}
+ To setup the asnclp session to replicate, execute the file `demopub.asnclp`
 {%highlight java%}
  asnclp -f demopub.asnclp
 {%endhighlight%}

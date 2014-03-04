@@ -151,7 +151,7 @@ public class Employee implements IDomainEntity<Long> {
 }
 {%endhighlight%}
 
-Since we are using Hibernate for the queries, we are declaring the Class as an {{@Entity}}. However we do not define a table for the Entity otherwise Hibernate would try to map the ROWID attribute to a column in the oracle table.
+Since we are using Hibernate for the queries, we are declaring the Class as an `@Entity`. However we do not define a table for the Entity otherwise Hibernate would try to map the ROWID attribute to a column in the oracle table.
 
 # Deployment
 
@@ -184,7 +184,7 @@ private void initialize() {
 }
 
 {%endhighlight%}
-If the space is not partitioned we simply read all employees from the table and write them to the space. If the space is partitioned, we will query the database with the following query assuming that the {{departmentid}} attribute is the routing attribute:
+If the space is not partitioned we simply read all employees from the table and write them to the space. If the space is partitioned, we will query the database with the following query assuming that the `departmentid` attribute is the routing attribute:
 
 {%highlight java%}
 "select rowid, id, processed, firstName, lastname, age, departmentid from employee where mod(departmentid,?) = ? "
