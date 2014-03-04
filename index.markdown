@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  Solutions and Patterns Home
+title:  Solutions and Patterns
 categories: SBP
 ---
 
-This section contains GigaSpaces usage patterns, patterns and solutions. Each pattern is listed with the author/origin, and the GigaSpaces product version that it was tested against.
+This section contains GigaSpaces XAP known patterns, solutions and best practicees that we've accumulated over time based on numerous real life use cases. Each pattern is listed with its author/origin, and the GigaSpaces product version that it was tested against. 
+
+{% note %}The patterns below are presented as is. While most of them are used in real life use cases and productions environments, and GigaSpaces is making its best effort to keep them up to date, they should not be considered as fully productized artifacts, and you should test them in your own environment before using them.{% endnote %}
 
 # Data Access Patterns
 
