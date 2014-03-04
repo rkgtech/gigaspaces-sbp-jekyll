@@ -229,4 +229,4 @@ gs deploy -cluster total_members=2 tomcat-pu-1.0-SNAPSHOT.jar
 
 # Elastic Load Balancer
 
-Implementing automatic updates of load balancer tables can be done through the combination of the Admin API for monitoring the processing unit instances. A similar best practice is available through the [Apache Load Balancer processing unit](./web-load-balancer-agent-pu.html).
+Implementing automatic updates of load balancer tables can be done through the combination of the Admin API for monitoring the processing unit instances. A similar pattern is available through the [Apache Load Balancer processing unit](./web-load-balancer-agent-pu.html).

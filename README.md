@@ -1,4 +1,4 @@
 gigaspaces-sbp-jekyll
 =====================
 
-The solution and best practices section of the GigaSpaces XAP wiki
+The solution and patterns section of the GigaSpaces XAP wiki

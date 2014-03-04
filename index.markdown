@@ -1,29 +1,29 @@
 ---
 layout: post
-title:  Solutions and Best Practices Home
+title:  Solutions and Patterns Home
 categories: SBP
 ---
 
-This section contains GigaSpaces usage patterns, best practices and solutions. Each best practice is listed with the author/origin, and the GigaSpaces product version that it was tested against.
+This section contains GigaSpaces usage patterns, patterns and solutions. Each pattern is listed with the author/origin, and the GigaSpaces product version that it was tested against.
 
 # Data Access Patterns
 
 {: .table .table-bordered}
-| Best Practice | Level | Description |
+| Pattern | Level | Description |
 |:--------------|:------|:------------|
-|[Kafka Integration](./kafka-integration.html) | Advanced | This best practice explains how to integrate XAP with Kafka.|
-|[Cache Interface](./cache-interface.html) | Beginner | This best practice explains how to implement a cache interface using the Map API.|
+|[Kafka Integration](./kafka-integration.html) | Advanced | This pattern explains how to integrate XAP with Kafka.|
+|[Cache Interface](./cache-interface.html) | Beginner | This pattern explains how to implement a cache interface using the Map API.|
 |[Moving from Hibernate to Space](./moving-from-hibernate-to-space.html) | Beginner | Moving from Database Centric into In-Memory Model. Can be used when moving from **J2EE Session Bean** into XAP.|
 |[Finding Partition Load](./finding-partition-load.html)| Beginner | Monitoring Data Grid partitions in real time.|
 |[Even Data Distribution](./even-data-distribution.html)| Beginner | Technique to ensure even data load-balancing with partitioned IMDG.|
 |[Space Object Modeling](./space-object-modeling.html)| Beginner | Migrating Relational Model into Object model.|
-|[Oracle Delta Server](./oracle-delta-server.html)| Beginner |This best practice presents the Oracle Delta Server allowing the data grid to receive updates from the database conducted by applications that are not using the data grid as their system of record (Non-Aware Data-Grid Clients) |
+|[Oracle Delta Server](./oracle-delta-server.html)| Beginner |This pattern presents the Oracle Delta Server allowing the data grid to receive updates from the database conducted by applications that are not using the data grid as their system of record (Non-Aware Data-Grid Clients) |
 |[Excel that Scales Solution](./excel-that-scales-solution.html)| Beginner | Leveraging GigaSpaces .Net API to scale Excel applications.|
 |[Global ID Generator](./global-id-generator.html)| Beginner | Replacing Database sequencing with lightweight In-Memory ID Generator.|
 |[Web Service PU](./web-service-pu.html)|Beginner | Web Service Processing Unit. Using the CXF Framework.|
 |[ODBC Driver](./odbc-driver.html)| Beginner | Accessing GigaSpaces Data Grid via 3rd party ODBC Driver.|
 |[IMDG with Large Backend Database Support](./imdg-with-large-backend-database-support.html)| Advanced | Leveraging IMDG running in LRU mode with large backend Database.|
-|[DB2 Delta Server](./db2-delta-server.html)| Advanced |This best practice presents the DB2 Delta Server allowing the data grid to receive updates from the database conducted by applications that are not using the data grid as their system of record (Non-Aware Data-Grid Clients) |
+|[DB2 Delta Server](./db2-delta-server.html)| Advanced |This pattern presents the DB2 Delta Server allowing the data grid to receive updates from the database conducted by applications that are not using the data grid as their system of record (Non-Aware Data-Grid Clients) |
 |[Dynamic Polling Container Templates using TriggerOperationHandler](./dynamic-polling-container-templates-using-triggeroperationhandler.html)| Advanced | Polling Containers using TriggerOperationHandler |
 |[Custom Matching](./custom-matching.html)| Advanced | Implementing complex customized queries for pattern matching.|
 |[Custom Eviction](./custom-eviction.html)| Advanced | Implementing used defined data eviction when using large backend Database.|
@@ -38,7 +38,7 @@ This section contains GigaSpaces usage patterns, best practices and solutions. E
 # Parallel Processing & Messaging Patterns
 
 {: .table .table-bordered}
-| Best Practice | Level | Description |
+| Pattern | Level | Description |
 |:--------------|:------|:------------|
 |[Map-Reduce Pattern - Executors Example](./map-reduce-pattern---executors-example.html)| Beginner | Implementing Task Executors and Service Executors to perform parallel queries or parallel processing across multiple IMDG partitions. Can be used when moving from **J2EE EJB**/RMI/IIOP into XAP.|
 |[Master-Worker Pattern](./master-worker-pattern.html)| Beginner | Grid computing pattern. Implementing distributed processing across multiple workers deployed into the Grid. |
@@ -54,7 +54,7 @@ This section contains GigaSpaces usage patterns, best practices and solutions. E
 # Setup Production Environment
 
 {: .table .table-bordered}
-| Best Practice | Level | Description |
+| Pattern | Level | Description |
 |:--------------|:------|:------------|
 |[Embedding Tomcat as a Web Container](./tomcat-pu.html)| Beginner | This article presents embedding Tomcat 7 within the XAP data grid|
 |[Embedding XAP for OEMs](./embedding-xap-for-oems.html)| Beginner | A quick and simple example of how an OEM might embed GigaSpaces XAP for customer use.|
@@ -73,7 +73,7 @@ This section contains GigaSpaces usage patterns, best practices and solutions. E
 |[Capacity Planning](./capacity-planning.html)| Advanced | Considerations for sizing your system before moving into production.|
 |[Refreshable Business Logic Example](./refreshable-business-logic-example.html)| Advanced | Using the administration API to reload new application code (hot deploy) while the application is running.|
 |[Recipes For XAP Cloud Deployment](./automated-xap-deployment-with-cloudify.html)| Advanced | Recipes For XAP Cloud Deployment.|
-|[Puppet to install and configure XAP](./puppet-xap-module.html)| Advanced | This best practice explains how to use Puppet to install and configure XAP.|
+|[Puppet to install and configure XAP](./puppet-xap-module.html)| Advanced | This pattern explains how to use Puppet to install and configure XAP.|
 
 
 
@@ -82,7 +82,7 @@ This section contains GigaSpaces usage patterns, best practices and solutions. E
 # WAN Based Deployment
 
 {: .table .table-bordered}
-| Best Practice | Level | Description |
+| Pattern | Level | Description |
 |:--------------|:------|:------------|
 |[Clusters Over WAN](./wan-replication-gateway.html)| Beginner | Example for WAN replication implementation.|
 |[WAN Gateway Pass Through Replication](./wan-gateway-pass-through-replication.html)| Beginner | Example for implementing a pass through WAN replication topology.|
@@ -93,7 +93,7 @@ This section contains GigaSpaces usage patterns, best practices and solutions. E
 # Solutions
 
 {: .table .table-bordered}
-| Best Practice | Level | Description |
+| Pattern | Level | Description |
 |:--------------|:------|:------------|
 |[Elastic Distributed Calculation Engine](./elastic-distributed-calculation-engine.html)|Advanced| Elastic Distributed Calculation Engine implementation using Map-Reduce approach.|
 |[Trading Settlement](./trading-settlement.html) |Advanced| A trading settlement system where the entire tier-based architecture is built on GigaSpaces.|

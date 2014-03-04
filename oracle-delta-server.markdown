@@ -8,7 +8,7 @@ weight: 1300
 
 
 {% tip %}
-**Summary:** {% excerpt %}This best practice presents the Oracle Delta Server allowing the data grid to receive updates from the database conducted by applications that are not using the data grid as their system of record (Non-Aware Data-Grid Clients){% endexcerpt %}<br/>
+**Summary:** {% excerpt %}This pattern presents the Oracle Delta Server allowing the data grid to receive updates from the database conducted by applications that are not using the data grid as their system of record (Non-Aware Data-Grid Clients){% endexcerpt %}<br/>
 **Author**:  Chris Roffler<br/>
 **Recently tested with GigaSpaces version**: XAP 9.6<br/>
 **Last Update:** Nov 2013<br/>
@@ -25,7 +25,7 @@ Almost every large enterprise system includes legacy applications or backend sys
 
 <iframe width="640" height="390" src="//www.youtube.com/embed/EOyDg-mI3z0" frameborder="0" allowfullscreen></iframe>
 
-The Delta Server described with this best practice responsible for getting notifications from the database for any user activity (excluding data grid updates) and delegate these to the data grid. You may specify the exact data set updates to be delegated to the data grid by specifying a SQL Query that will indicate which records updates / removal / addition should be reflected within the data grid.
+The Delta Server described with this pattern responsible for getting notifications from the database for any user activity (excluding data grid updates) and delegate these to the data grid. You may specify the exact data set updates to be delegated to the data grid by specifying a SQL Query that will indicate which records updates / removal / addition should be reflected within the data grid.
 
 # Scenario
 

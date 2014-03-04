@@ -5,7 +5,7 @@ categories: SBP
 parent: data-access-patterns.html
 weight: 100
 ---
-{% summary page %}This best practice explains how to implement a cache interface using the Map API.{% endsummary %}
+{% summary page %}This pattern explains how to implement a cache interface using the Map API.{% endsummary %}
  {% tip %}
  **Author**:  Shay Hassidim<br/>
  **Recently tested with GigaSpaces version**: XAP 9.6<br/>

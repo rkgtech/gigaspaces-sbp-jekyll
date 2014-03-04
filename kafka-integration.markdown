@@ -6,7 +6,7 @@ parent: data-access-patterns.html
 weight: 50
 ---
 
-{% summary page %}This best practice explains how to use Kafka with XAP.{% endsummary %}
+{% summary page %}This pattern explains how to use Kafka with XAP.{% endsummary %}
  {% tip %}
  **Author**:Oleksiy Dyagilev<br/>
  **Recently tested with GigaSpaces version**: XAP 9.6<br/>
@@ -19,7 +19,7 @@ weight: 50
 [Apache Kafka](http://kafka.apache.org) is a distributed publish-subscribe messaging system. It is designed to support persistent messaging with a O(1) disk structures that provides constant time performance even with many TB of stored messages.
 Apache Kafka provides High-throughput even with very modest hardware, Kafka can support hundreds of thousands of messages per second. Apache Kafka supports partitioning the messages over Kafka servers and distributing consumption over a cluster of consumer machines while maintaining per-partition ordering semantics. Many times Apache Kafka is used to perform parallel data load into Hadoop.
 
-This best practice integrates GigaSpaces with Apache Kafka. GigaSpaces' write-behind IMDG operations to Kafka making it available for the subscribers. Such could be Hadoop or other data warehousing systems using the data for reporting and processing.
+This pattern integrates GigaSpaces with Apache Kafka. GigaSpaces' write-behind IMDG operations to Kafka making it available for the subscribers. Such could be Hadoop or other data warehousing systems using the data for reporting and processing.
 
 # XAP Kafka Integration Architecture
 

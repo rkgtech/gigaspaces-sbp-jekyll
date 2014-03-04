@@ -55,7 +55,7 @@ _The plugin is currently delivering some very basic features and has to be impro
 
 # Building the plugin
 
-If you wish to enhance the plugin, fix bugs or just review the source code, you can [download the source code](https://github.com/Gigaspaces/bestpractices) from _GigaSpaces Solutions and Best Practices GitHub repository_ and build it yourself.
+If you wish to enhance the plugin, fix bugs or just review the source code, you can [download the source code](https://github.com/Gigaspaces/bestpractices) from _GigaSpaces Solutions and Patterns GitHub repository_ and build it yourself.
 Plugin package uses maven but requires a few Hyperic artifacts that are not available in public repositories. In order to build the plugin you'll first have to add them to your repository:
 
 - Run the following commands:

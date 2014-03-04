@@ -5,7 +5,7 @@ categories: SBP
 parent: production.html
 weight: 100
 ---
-{% summary page %}This best practice explains how to use Puppet to install and configure XAP.{% endsummary %}
+{% summary page %}This pattern explains how to use Puppet to install and configure XAP.{% endsummary %}
  {% tip %}
  **Author**:  Shay Hassidim<br/>
  **Recently tested with GigaSpaces version**: XAP 9.6<br/>
