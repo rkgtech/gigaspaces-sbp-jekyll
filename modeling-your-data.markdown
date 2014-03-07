@@ -56,7 +56,7 @@ With Embedded Relationships a parent object physically contains the associated o
 
 ### Embedded Relationships Data Retrieval Flow
 
-Fetching objects from the space when using the Embedded Relationships model done by using a [SQLQuery]({%latestjavaurl%}/sqlquery.html) with the `readMultiple` call or the [IteratorBuilder]({%latestjavaurl%}/paging-support-with-space-iterator.html) when having large set of objects where the [SQLQuery]({%latestjavaurl%}/sqlquery.html) predicate using root level or embedded objects properties. With a single `SQLQuery` you may specify a query that span objects from different data types related to each other contained in each other. The embedded objects may be elements within an array or any type of collection (List , Map) or just a simple referenced object.
+Fetching objects from the space when using the Embedded Relationships model done by using a [SQLQuery]({%latestjavaurl%}/query-sql.html) with the `readMultiple` call or the [IteratorBuilder]({%latestjavaurl%}/query-paging-support.html) when having large set of objects where the [SQLQuery]({%latestjavaurl%}/query-sql.html) predicate using root level or embedded objects properties. With a single `SQLQuery` you may specify a query that span objects from different data types related to each other contained in each other. The embedded objects may be elements within an array or any type of collection (List , Map) or just a simple referenced object.
 
 ### Updating Embedded objects
 
@@ -79,11 +79,11 @@ The following describes the different data modeling options available with Non-E
 
 #### Parent-First Data Retrieval Flow
 
-With this approach you first retrieve an initial set of "root space objects" usually using a [SQLQuery]({%latestjavaurl%}/sqlquery.html) or a [template]({%latestjavaurl%}/template-matching.html) with the `readMultiple` call or the [IteratorBuilder]({%latestjavaurl%}/paging-support-with-space-iterator.html) when having large set of objects and later using some meta data stored within these root space objects such as the ID or IDs of related objects and their routing field value (when having these distributed across remote multiple partitions) to fetch the related (child) objects. Fetching these should use the `readById` or `readByIds` calls. Both the `readById` or `readByIds` allows you to provide the routing field value avoiding the need to search the entire cluster for matching objects. You may also use the [Change API]({%latestjavaurl%}/change-api.html) call to modify specific child objects without even reading these first.
+With this approach you first retrieve an initial set of "root space objects" usually using a [SQLQuery]({%latestjavaurl%}/query-sql.html) or a [template]({%latestjavaurl%}/query-template-matching.html) with the `readMultiple` call or the [IteratorBuilder]({%latestjavaurl%}/query-paging-support.html) when having large set of objects and later using some meta data stored within these root space objects such as the ID or IDs of related objects and their routing field value (when having these distributed across remote multiple partitions) to fetch the related (child) objects. Fetching these should use the `readById` or `readByIds` calls. Both the `readById` or `readByIds` allows you to provide the routing field value avoiding the need to search the entire cluster for matching objects. You may also use the [Change API]({%latestjavaurl%}/change-api.html) call to modify specific child objects without even reading these first.
 
 #### Child-First Data Retrieval Flow
 
-With this approach you access the referenced (child) objects directly and from these access their parent object. With this flow the child object store the parent object ID (and routing field value). You query the space for child objects via some property(s) using a [SQLQuery]({%latestjavaurl%}/sqlquery.html) or a [template]({%latestjavaurl%}/template-matching.html) with the `readMultiple` call , iterate over the child objects result set collecting getting the parent IDs and via the `readByIds` call read all relevant parent objects.
+With this approach you access the referenced (child) objects directly and from these access their parent object. With this flow the child object store the parent object ID (and routing field value). You query the space for child objects via some property(s) using a [SQLQuery]({%latestjavaurl%}/query-sql.html) or a [template]({%latestjavaurl%}/query-template-matching.html) with the `readMultiple` call , iterate over the child objects result set collecting getting the parent IDs and via the `readByIds` call read all relevant parent objects.
 
 {% tip %}
 Since version 9.5, XAP supports projections where you can read specific properties (delta read) instead of reading the entire space object content. This may optimize the data retrieval flow.
@@ -333,7 +333,7 @@ return booksFound;
 {% endhighlight %}
 
 {% tip %}
-See the [Id Queries]({%latestjavaurl%}/id-queries.html) page for more details how `readById` can be used.
+See the [Id Queries]({%latestjavaurl%}/query-by-id.html) page for more details how `readById` can be used.
 {% endtip %}
 
 To query for a specific **Author** with a specific **Book** title the query code would look like this:
@@ -576,7 +576,7 @@ return booksFound;
 {% endhighlight %}
 
 {% tip %}
-See the [Id Queries]({%latestjavaurl%}/id-queries.html) page for more details how `readByIds` can be used.
+See the [Id Queries]({%latestjavaurl%}/query-by-id.html) page for more details how `readByIds` can be used.
 {% endtip %}
 
 To query for a specific **Author** with a specific **Book** title the query would look like this:
@@ -601,7 +601,7 @@ return authorFounds ;
 
 {% tip %}
 **More Examples**
-See the [SQLQuery]({%latestjavaurl%}/sqlquery.html) section for details about embedded entities query and indexing.
+See the [SQLQuery]({%latestjavaurl%}/query-sql.html) section for details about embedded entities query and indexing.
 See the [Parent Child Relationship](./parent-child-relationship.html) for an example for non-embedded relationships.
 {% endtip %}
 

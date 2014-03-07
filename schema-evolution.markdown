@@ -65,7 +65,7 @@ public class MyClass {
 
 See more:
 
-- [Matching Nested Maps]({%latestjavaurl%}/sqlquery.html#MatchingNestedMaps)
+- [Matching Nested Maps]({%latestjavaurl%}/query-sql.html#MatchingNestedMaps)
 - [Nested Object Indexing]({%latestjavaurl%}/indexing.html#Nestedpropertiesindexing)
 
 # Evolving Space Schema using Placeholder Fields

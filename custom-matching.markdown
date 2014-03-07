@@ -6,7 +6,7 @@ parent: data-access-patterns.html
 weight: 100
 ---
 
-{% compositionsetup %}
+
 
 {% tip %}
 **Summary:** {% excerpt %}Custom Matching Implementation{% endexcerpt %}<br/>
@@ -20,7 +20,7 @@ weight: 100
 
 # Overview
 
-Usually you index and execute queries using primitive fields (long, float, string, etc). The fields may be within the root level of the space object, or embedded within [nested objects]({%latestjavaurl%}/sqlquery.html#nested-0bject-query) within the space object. You may construct a query using a template object or SQL to specify the criteria you would like to use when the matching phase is performed within the space when looking for the relevant objects.
+Usually you index and execute queries using primitive fields (long, float, string, etc). The fields may be within the root level of the space object, or embedded within [nested objects]({%latestjavaurl%}/query-sql.html#nested-0bject-query) within the space object. You may construct a query using a template object or SQL to specify the criteria you would like to use when the matching phase is performed within the space when looking for the relevant objects.
 
 In some cases you might want to use a custom data type with a custom business logic to find matching objects within the space, rather the usual [primitive data type](http://java.sun.com/docs/books/tutorial/java/nutsandbolts/datatypes.html) comparison. To allow the space to invoke your business logic when the matching process is conducted, the [Comparable](http://docs.oracle.com/javase/1.5.0/docs/api/java/lang/Comparable.html) interface should be implemented for a class that stores the data you would like to use with your custom business logic.
 
