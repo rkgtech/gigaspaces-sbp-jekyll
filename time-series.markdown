@@ -27,26 +27,34 @@ A time series is a sequence of data points, measured typically at successive poi
 Good examples of time series are the daily closing value of the Dow Jones, NASDAQ, and S&P indices. They are used in statistics, signal processing, pattern recognition, econometrics, mathematical finance, weather forecasting, earthquake prediction, control engineering, astronomy, and communications engineering.
 
 This demo will provide a visual representation of a running time series which is being updated in real-time. Internally concurrent executor threads will mimic the generation of events, by random airline customers, looking to search and book flights to various points of origin. Each event will be processed, categorized, and captured within am in-memory time series object.
+
 The User Interface for this demo will mock an Airline Flight Operations Dashboard which will consistently update a charted time series. The horizontal axis, t, which is denoted in hours will be updated every 2 seconds. The vertical axis, X, represents the amount of booked flights from a set source airport to a destination airport. For clarity and readability, this demo will only display the top 5 source and destination pairs.
 
 {%panel%}
 **It is designed to be real-time, mission-critical and provide:**
 Scalability, High availability, Low latency, Write-intensive {%wbr%}
 
-**The following XAP features are utilized:**
-•	Event Processing
-•	Data Partitioning
-•	Indexing
-•	Space Querying
-•	Leases – Automatic Expiration
-•	Projection API
-•	Change API
-•	DAO
-•	Map-Reduce
-•	Task Execution
-•	Jetty Integration
-•	SLA-Driven Capabilities
+**The following XAP features are utilized:** {%wbr%}
+•	[Event Processing]({%latestjavaurl%}/event-processing.html){%wbr%}
+•	[Data Partitioning]({%latestjavaurl%}/data-partitioning.html) {%wbr%}
+•	[Indexing]({%latestjavaurl%}/indexing.html)  {%wbr%}
+•	[Space Querying]({%latestjavaurl%}/querying-the-space.html) {%wbr%}
+•	[Leases – Automatic Expiration]({%latestjavaurl%}/leases---automatic-expiration.html) {%wbr%}
+•	[Projection API]({%latestjavaurl%}/query-partial-results.html) {%wbr%}
+•	[Change API]({%latestjavaurl%}/change-api.html){%wbr%}
+•	[DAO] {%wbr%}
+•	[Map-Reduce]({%latestjavaurl%}/task-execution-over-the-space.html){%wbr%}
+•	[Task Execution]({%latestjavaurl%}/task-execution-over-the-space.html){%wbr%}
+•	[Jetty Integration]({%latestjavaurl%}/web-application-support.html){%wbr%}
+•	[SLA-Driven Capabilities]({%latestjavaurl%}/configuring-the-processing-unit-sla.html){%wbr%}
 {%endpanel%}
+
+## Visual Time Series with Real Time Analytics
+
+Once the provided web processing unit is deployed you can access the demo’s web page at `http://host:port/my-app-web/index.jsp.` It will display the generic airline’s top-5 predetermined source and destinations airport sets in the left panel. Upon load, the rendered graph will show a time series in the form of a line chart. Its initial data will be limited to the last 10 inactive intervals that reside in the space. The graph can be altered on the fly in the form of area, bar and scatter charts (shown below). Once the loading process is complete the graph will update itself every 2 seconds showing the latest inactive interval along the time series; capturing the booking requests performed by the mocked users.
+
+![time-series-2.png](/attachment_files/sbp/time-series-2.png)
+
 
 # Architecture
 
@@ -61,9 +69,6 @@ The Processor makes use of two polling containers each individually designated t
 The timeSeries object is designed to track the amount of request occurrences for each set of source and destination airports. It does this with an embedded Map<String, Integer> attribute named “sourceDestinatinCounter”. Each timeSeries can store sourceDestination sets as a key to its map along with an Integer representing the number of occurrences within the given interval. By default a timeSeries object only remains active for 2 seconds, after which the Processor will create a new timeSeries.
 
 The Web Processing Unit hosts a web page that is capable of rendering a graph which will chart the inactive BookingTimeSeries objects according to their sequence in time. By default, the graph will only load the last 10 inactive BookingTimeSeries objects persisted in the space. Once the initial data is loaded, the web page will begin making scheduled AJAX requests to the underlying servlet to get the next available inactive timeSeries. By default each interval will last two seconds and will be represented along the horizontal axis, t, in hours.
-
-
-![time-series-2.png](/attachment_files/sbp/time-series-2.png)
 
 For scalability the servlet will use a TaskDelegate to perform multiple tasks executed in a collocated asynchronous manner with the space. One of the tasks is purposed to retrieve all inactive timeseries which occurred after a provided interval. Since the space is partitioned this task will be broadcasted across the entire cluster and will return a result that is a reduced operation of all the different executions.This Map-Reduce pattern will aggregate all counters from the partitioned spaces and reduce them into a single TreeMap which the web page can iterate in order to load the data into the graph.
 
