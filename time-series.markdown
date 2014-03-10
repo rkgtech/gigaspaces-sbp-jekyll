@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Time Series
+title:  Time Series with Real Time Analytics
 categories: SBP
 parent: solutions.html
 weight: 600
@@ -30,15 +30,16 @@ This demo will provide a visual representation of a running time series which is
 
 The User Interface for this demo will mock an Airline Flight Operations Dashboard which will consistently update a charted time series. The horizontal axis, t, which is denoted in hours will be updated every 2 seconds. The vertical axis, X, represents the amount of booked flights from a set source airport to a destination airport. For clarity and readability, this demo will only display the top 5 source and destination pairs.
 
+{%comment%}
 {%panel%}
 **It is designed to be real-time, mission-critical and provide:**
 Scalability, High availability, Low latency, Write-intensive {%wbr%}
 
 **The following XAP features are utilized:** {%wbr%}
-•	[Event Processing]({%latestjavaurl%}/event-processing.html){%wbr%}
-•	[Data Partitioning]({%latestjavaurl%}/data-partitioning.html) {%wbr%}
-•	[Indexing]({%latestjavaurl%}/indexing.html)  {%wbr%}
-•	[Space Querying]({%latestjavaurl%}/querying-the-space.html) {%wbr%}
+Event Processing]({%latestjavaurl%}/event-processing.html){%wbr%}
+Data Partitioning]({%latestjavaurl%}/data-partitioning.html) {%wbr%}
+Indexing]({%latestjavaurl%}/indexing.html)  {%wbr%}
+Space Querying]({%latestjavaurl%}/querying-the-space.html) {%wbr%}
 •	[Leases – Automatic Expiration]({%latestjavaurl%}/leases---automatic-expiration.html) {%wbr%}
 •	[Projection API]({%latestjavaurl%}/query-partial-results.html) {%wbr%}
 •	[Change API]({%latestjavaurl%}/change-api.html){%wbr%}
@@ -48,6 +49,8 @@ Scalability, High availability, Low latency, Write-intensive {%wbr%}
 •	[Jetty Integration]({%latestjavaurl%}/web-application-support.html){%wbr%}
 •	[SLA-Driven Capabilities]({%latestjavaurl%}/configuring-the-processing-unit-sla.html){%wbr%}
 {%endpanel%}
+{%endcomment%}
+
 
 ## Visual Time Series with Real Time Analytics
 
