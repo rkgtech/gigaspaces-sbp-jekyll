@@ -61,6 +61,8 @@ For scalability the servlet will use a TaskDelegate to perform multiple tasks ex
 
 # Key Features
 
+You can download a fully functional example from [here](/download_files/sbp/realTimeAnalyticsTimeSeries.rar)
+
 ### Event Processing
 Each type of request has a polling container listening for a new event for request-processing and incrementing the active timeSeries’ sourceDesinationCounter.
 
