@@ -6,7 +6,6 @@ parent: solutions.html
 weight: 500
 ---
 
-{% compositionsetup %}
 
 {% tip %}
 **Summary:** {% excerpt %}Trading Settlement Demo.{% endexcerpt %}<br/>

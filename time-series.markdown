@@ -2,8 +2,8 @@
 layout: post
 title:  Time Series
 categories: SBP
-parent: data-access-patterns.html
-weight: 30
+parent: solutions.html
+weight: 600
 ---
 
 {% summary page %}This pattern explains how to implement a time series.{% endsummary %}
