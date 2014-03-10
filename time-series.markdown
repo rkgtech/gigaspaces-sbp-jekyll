@@ -1,0 +1,258 @@
+---
+layout: post
+title:  Time Series
+categories: SBP
+parent: data-access-patterns.html
+weight: 30
+---
+
+{% summary page %}This pattern explains how to implement a time series.{% endsummary %}
+ {% tip %}
+ **Author**:  Allen Terleto<br/>
+ **Recently tested with GigaSpaces version**: XAP 9.7<br/>
+ **Last Update:** March 2014<br/>
+
+{% toc minLevel=1|maxLevel=1|type=flat|separator=pipe %}
+{% endtip %}
+
+# Overview
+
+A time series is a sequence of data points, measured typically at successive points in time spaced at uniform time intervals (or space). If observations are made on some phenomenon throughout time, it is most sensible to display the data in the order in which they arose, particularly since successive observations will probably be dependent. Time series are best displayed in a scatter plots and line charts. The series value X is plotted on the vertical axis and time t on the horizontal axis. Time is called the independent variable (in this case however, something over which you have little control). There are two kinds of time series data: 
+
+
+1.	Continuous, where we have an observation at every instant of time, e.g. lie detectors, electrocardiograms. We denote this using observation X at time t, X(t). 
+2.	Discrete, where we have an observation at (usually regularly) spaced intervals. We denote this as Xt. 
+
+
+Good examples of time series are the daily closing value of the Dow Jones, NASDAQ, and S&P indices. They are used in statistics, signal processing, pattern recognition, econometrics, mathematical finance, weather forecasting, earthquake prediction, control engineering, astronomy, and communications engineering.
+
+This demo will provide a visual representation of a running time series which is being updated in real-time. Internally concurrent executor threads will mimic the generation of events, by random airline customers, looking to search and book flights to various points of origin. Each event will be processed, categorized, and captured within am in-memory time series object.
+The User Interface for this demo will mock an Airline Flight Operations Dashboard which will consistently update a charted time series. The horizontal axis, t, which is denoted in hours will be updated every 2 seconds. The vertical axis, X, represents the amount of booked flights from a set source airport to a destination airport. For clarity and readability, this demo will only display the top 5 source and destination pairs.
+
+{%panel%}
+**It is designed to be real-time, mission-critical and provide:**
+Scalability, High availability, Low latency {%wbr%}
+
+**The following XAP features are utilized:**
+Data Partitioning, Event Processing, Space Querying, Task Execution, Map-Reduce, Projection API, Change API, Remoting, Leasing,SLA
+{%endpanel%}
+
+# Architecture
+
+Feeder Processing Unit(s), utilizing Spring’s ThreadPoolTaskSchedulers, can concurrently generate a steady load of search and booking requests which are written to a remote space. The demo allows for feeders to be deployed as standard processing units or command-line java programs. By default each feeder is configured to update the space with a pool of 3 threads.
+	
+The space being updated by the feeders is embedded in a processing unit called a Processor. By default each Processor will maintain a separate partition of the “space” which is routed by the “airline” attribute. This airline attribute is required in all booking and search requests and for demo purposes is chosen from a fixed set of 4 airlines.
+
+The Processor makes use of two polling containers each individually designated to process their respective type of request; booking and search. Once a request event has been initiated by the Feeder, a pooling container will perform a take operation to remove the request from the space and analyze its “airline” attribute. The Processor will then use the airline as a routing key to read from the appropriate partition of the embedded space and find the active timeSeries object.
+
+![time-series-1.png](/attachment_files/sbp/time-series-1.png)
+
+The timeSeries object is designed to track the amount of request occurrences for each set of source and destination airports. It does this with an embedded Map<String, Integer> attribute named “sourceDestinatinCounter”. Each timeSeries can store sourceDestination sets as a key to its map along with an Integer representing the number of occurrences within the given interval. By default a timeSeries object only remains active for 2 seconds, after which the Processor will create a new timeSeries.
+
+The Web Processing Unit hosts a web page that is capable of rendering a graph which will chart the inactive BookingTimeSeries objects according to their sequence in time. By default, the graph will only load the last 10 inactive BookingTimeSeries objects persisted in the space. Once the initial data is loaded, the web page will begin making scheduled AJAX requests to the underlying servlet to get the next available inactive timeSeries. By default each interval will last two seconds and will be represented along the horizontal axis, t, in hours.
+
+
+![time-series-2.png](/attachment_files/sbp/time-series-2.png)
+
+For scalability the servlet will use a TaskDelegate to perform multiple tasks executed in a collocated asynchronous manner with the space. One of the tasks is purposed to retrieve all inactive timeseries which occurred after a provided interval. Since the space is partitioned this task will be broadcasted across the entire cluster and will return a result that is a reduced operation of all the different executions.This Map-Reduce pattern will aggregate all counters from the partitioned spaces and reduce them into a single TreeMap which the web page can iterate in order to load the data into the graph.
+
+![time-series-3.png](/attachment_files/sbp/time-series-3.png)
+
+
+# Key Features
+
+### Event Processing
+Each type of request has a polling container listening for a new event for request-processing and incrementing the active timeSeries’ sourceDesinationCounter.
+
+{%highlight java%}
+@Polling(concurrentConsumers=10)
+public class BookingRequestProcessor {
+
+    private Logger log = Logger.getLogger(this.getClass().getName());
+
+    private long timeSeriesInterval;
+    private Map<String, Integer> intervalAirlineMap = new HashMap<String, Integer>(4);
+
+    private IBookingTimeSeriesDAO bookingTimeSeriesDAO;
+
+
+    @SpaceDataEvent
+    public void processData(BookingRequest bookingRequest) {
+    	Assert.notNull(bookingTimeSeriesDAO, "**** bookingTimeSeriesDAO is a required property ****");
+
+    	bookingRequest.setProcessedData("PROCESSED : " + bookingRequest.getRawData());
+    	bookingRequest.setProcessed(true);
+    	String sourceDestinationAirport = AirportDataUtils.generateSourceDestinationKey(bookingRequest.getSourceAirport(), bookingRequest.getDestinationAirport());
+
+        BookingTimeSeries result = bookingTimeSeriesDAO.findBookingTimeSeriesWithinActiveInterval(bookingRequest.getAirline(), timeSeriesInterval);
+        if(result != null)
+    		bookingTimeSeriesDAO.incrementSourceDestinationCounter(result, sourceDestinationAirport);
+    	else
+    		createNewInterval(bookingRequest.getAirline(), sourceDestinationAirport);
+    }
+}
+{%endhighlight%}
+
+
+### Data Partitioning
+In a partitioned space, data is routed to a particular partition based on a routing property. In this system we use the airline attribute as our Routing property. This provides data affinity so that user requests and timeSeries objects are located in the same space, which minimizes latency.
+
+{%highlight java%}
+public abstract class TimeSeries implements java.io.Serializable {
+
+ 	private static final long serialVersionUID = -2128516066057590442L;
+
+ 	Integer interval;
+ 	String intervalId;
+ 	String airline;
+ 	Date lasttimestamp;
+ 	Map<String, Integer> sourceDestinationCounter;
+ 	String status;
+
+ 	public static final String createIntervalId(Integer interval, String airline) {
+ 		return interval + Constants.UNDER_SCORE + airline;
+ 	}
+
+ 	public TimeSeries() {
+ 	}
+
+ 	@SpaceId(autoGenerate=false)
+ 	public String getIntervalId() {
+ 		return intervalId;
+ 	}
+
+ 	@SpaceRouting
+ 	@SpaceIndex(type=SpaceIndexType.BASIC)
+ 	public String getAirline() {
+ 		return airline;
+	}
+}
+{%endhighlight%}
+
+
+### Indexing
+
+When a space is looking for a match for a read or take operation, it iterates over non-null values in the template, looking for matches in the space. This process can be time consuming, especially when there are many potential matches. To improve performance, it is possible to index one or more properties. The space maintains additional data for indexed properties, which shortens the time required to determine a match, thus improving performance.
+
+**Basic index** - speeds up equality matches
+**Extended index** - speeds up comparison matches
+
+
+{%highlight java%}
+	@SpaceRouting
+	@SpaceIndex(type=SpaceIndexType.BASIC)
+	public String getAirline() {
+		return airline;
+	}
+
+	@SpaceIndex(type=SpaceIndexType.EXTENDED)
+	public Date getLasttimestamp() {
+		return lasttimestamp;
+	}
+{%endhighlight%}
+
+
+### DAO
+The below interface defines the available operations that can be run against the space for a given Space object. This interface is shared amongst the different processing units alongside the domain model in a separate project called Common. The implementation of the interface can be uniquely determined by any processing unit which adds Common on its build path.
+
+{%highlight java%}
+public interface IBookingTimeSeriesDAO {
+
+	BookingTimeSeries[] readAllCompletedTimeSeriesAfterInterval(Integer lastInterval);
+
+	BookingTimeSeries readTimeSeriesByIntervalId(Integer interval, String airline);
+
+	BookingTimeSeries readActiveTimeSeriesByAirline(String airline);
+
+	void save(BookingTimeSeries bookingTimeSeries);
+
+	BookingTimeSeries findBookingTimeSeriesWithinActiveInterval(String airline, long timeSeriesInterval);
+
+	void incrementSourceDestinationCounter(BookingTimeSeries bookingTimeSeries, String sourceDestination);
+
+	void updateCompletedStatus(BookingTimeSeries bookingTimeSeries);
+}
+{%endhighlight%}
+
+### Space Querying
+
+ID-Based Queries:
+
+For best performance a readById operation can be used if ID is available
+
+Template Matching:
+
+The template is a POJO of the desired entry type, and the properties which are set on the template (i.e. not null) are matched against the respective properties of entries to the same type in the space. Properties with null values are ignored (not matched).
+
+SQL Query:
+
+The SQLQuery class is used to query the space using SQL-like syntax. The query statement includes only the WHERE statement part - the selection aspect of a SQL statement is embedded in other parameters for a SQL query.
+
+{%highlight java %}
+public class BookingTimeSeriesDAO implements IBookingTimeSeriesDAO {
+
+	@GigaSpaceContext(name = "gigaSpace")
+	private GigaSpace gigaSpace;
+
+	public void setGigaSpace(GigaSpace gigaSpace) {
+		this.gigaSpace = gigaSpace;
+	}
+
+	public BookingTimeSeries[] readAllCompletedTimeSeriesAfterInterval(Integer lastInterval) {
+		SQLQuery<BookingTimeSeries> query = new SQLQuery<BookingTimeSeries>(BookingTimeSeries.class, "interval > ? and status = ?");
+		query.setParameter(1, lastInterval);
+        	query.setParameter(2, Constants.STATUS_COMPLETE);
+
+		return gigaSpace.readMultiple(query);
+	}
+
+	public BookingTimeSeries readTimeSeriesByIntervalId(Integer interval, String airline) {
+		String intervalId = TimeSeries.createIntervalId(interval, airline);
+		return gigaSpace.readById(BookingTimeSeries.class, intervalId, airline);
+	}
+
+	//BookingTimeSeries will only remain in the space for 60 seconds which correlates to approximately 35-40 intervals
+	public void save(BookingTimeSeries bookingTimeSeries) {
+		gigaSpace.write(bookingTimeSeries, 60000);
+	}
+
+}
+{%endhighlight%}
+
+
+### Leases – Automatic Expiration
+In distributed applications on a network, where there may be partial failures of the network or of components, there needs to be a way for components to be timed out if they have failed, or have become unreachable. Lease is a basic mechanism GigaSpaces provides to address this problem.
+
+{%highlight java%}
+public void save(BookingTimeSeries bookingTimeSeries) {
+	gigaSpace.write(bookingTimeSeries, 60000);
+}
+{%endhighlight%}
+
+
+### Projection API
+
+In some cases when querying the space for objects, only specific properties of that objects are required and not the entire object (delta read). For that purpose the Projection API can be used where one can specify which properties are of interest and the space will only populate these properties with the actual data when the result is returned back to the user. This approach reduces network overhead, garbage memory generation and serialization CPU overhead.
+
+{%highlight java%}
+public BookingTimeSeries readActiveTimeSeriesByAirline(String airline) {
+	SQLQuery<BookingTimeSeries> query = new SQLQuery<BookingTimeSeries>(BookingTimeSeries.class, "airline = ? and status = ?")
+		.setProjections("interval"); //Use Projections API to return only the interval attribute
+
+	query.setParameter(1, airline);
+    query.setParameter(2, Constants.STATUS_ACTIVE);
+
+    return gigaSpace.read(query);
+}
+{%endhighlight%}
+
+### Change API
+
+The GigaSpace.change and the ChangeSet allows updating existing objects in space, by specifying only the required change instead of passing the entire updated object. This reduces the required network traffic between the client and the space, and the network traffic generated from replicating the changes between the space instances (e.g. between the primary space instance and its backup).
+
+{%highlight java%}
+public void incrementSourceDestinationCounter(BookingTimeSeries bookingTimeSeries, String sourceDestination) {
+    IdQuery<BookingTimeSeries> idQuery = new IdQuery<BookingTimeSeries>(BookingTimeSeries.class, bookingTimeSeries.getIntervalId());
+ 	gigaSpace.change(idQuery, new ChangeSet().increment("sourceDestinationCounter." + sourceDestination, 1));
+}
+{%endhighlight%}

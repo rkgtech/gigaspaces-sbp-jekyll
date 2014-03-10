@@ -14,6 +14,7 @@ This section contains GigaSpaces XAP known patterns, solutions and best practice
 | Pattern | Level | Description |
 |:--------------|:------|:------------|
 |[Kafka Integration](./kafka-integration.html) | Advanced | This pattern explains how to integrate XAP with Kafka.|
+|[Time Series](./time-series.html) | Advanced | This pattern explains how to create a time series with XAP .|
 |[Cache Interface](./cache-interface.html) | Beginner | This pattern explains how to implement a cache interface using the Map API.|
 |[Moving from Hibernate to Space](./moving-from-hibernate-to-space.html) | Beginner | Moving from Database Centric into In-Memory Model. Can be used when moving from **J2EE Session Bean** into XAP.|
 |[Finding Partition Load](./finding-partition-load.html)| Beginner | Monitoring Data Grid partitions in real time.|
