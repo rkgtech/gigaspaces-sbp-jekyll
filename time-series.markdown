@@ -17,20 +17,18 @@ weight: 600
 
 # Overview
 
-A time series is a sequence of data points, measured typically at successive points in time spaced at uniform time intervals (or space). If observations are made on some phenomenon throughout time, it is most sensible to display the data in the order in which they arose, particularly since successive observations will probably be dependent. Time series are best displayed in a scatter plots and line charts. The series value X is plotted on the vertical axis and time t on the horizontal axis. Time is called the independent variable (in this case however, something over which you have little control). There are two kinds of time series data: 
+A `Time Series` is a sequence of data points, measured typically at successive points in time spaced at uniform time intervals (or space). If observations are made on some phenomenon throughout time, it is most sensible to display the data in the order in which they arose, particularly since successive observations will probably be dependent. Time series are best displayed in a scatter plots and line charts. The series value X is plotted on the vertical axis and time t on the horizontal axis. Time is called the independent variable (in this case however, something over which you have little control). There are two kinds of time series data: 
 
 
-1.	Continuous, where we have an observation at every instant of time, e.g. lie detectors, electrocardiograms. We denote this using observation X at time t, X(t). 
-2.	Discrete, where we have an observation at (usually regularly) spaced intervals. We denote this as Xt. 
+1.	Continuous, where we have an observation at every instant of time, e.g. lie detectors, electrocardiograms. We denote this using observation `X` at time `t`, `X(t)`. 
+2.	Discrete, where we have an observation at (usually regularly) spaced intervals. We denote this as `Xt`. 
 
 
 Good examples of time series are the daily closing value of the Dow Jones, NASDAQ, and S&P indices. They are used in statistics, signal processing, pattern recognition, econometrics, mathematical finance, weather forecasting, earthquake prediction, control engineering, astronomy, and communications engineering.
 
 This demo will provide a visual representation of a running time series which is being updated in real-time. Internally concurrent executor threads will mimic the generation of events, by random airline customers, looking to search and book flights to various points of origin. Each event will be processed, categorized, and captured within am in-memory time series object.
 
-The User Interface for this demo will mock an Airline Flight Operations Dashboard which will consistently update a charted time series. The horizontal axis, t, which is denoted in hours will be updated every 2 seconds. The vertical axis, X, represents the amount of booked flights from a set source airport to a destination airport. For clarity and readability, this demo will only display the top 5 source and destination pairs.
-
-
+The User Interface for this demo will mock an **Airline Flight Operations Dashboard** which will consistently update a charted time series. The **horizontal axis**, `t`, which is denoted in hours will be updated every 2 seconds. The **vertical axis**, `X`, represents the amount of booked flights from a set source airport to a destination airport. For clarity and readability, this demo will only display the top 5 source and destination pairs.
 
 **It is designed to be real-time, mission-critical and provide:**
 
@@ -38,7 +36,6 @@ The User Interface for this demo will mock an Airline Flight Operations Dashboar
 - High availability
 - Low latency
 - Write-intensive
-
 
 **The following XAP features are utilized:**
 
@@ -56,8 +53,6 @@ The User Interface for this demo will mock an Airline Flight Operations Dashboar
 - SLA-Driven Capabilities
 
 
-
-
 ## Visual Time Series with Real Time Analytics
 
 Once the provided web processing unit is deployed you can access the demo’s web page at `http://host:port/my-app-web/index.jsp.` It will display the generic airline’s top-5 predetermined source and destinations airport sets in the left panel. Upon load, the rendered graph will show a time series in the form of a line chart. Its initial data will be limited to the last 10 inactive intervals that reside in the space. The graph can be altered on the fly in the form of area, bar and scatter charts (shown below). Once the loading process is complete the graph will update itself every 2 seconds showing the latest inactive interval along the time series; capturing the booking requests performed by the mocked users.
@@ -67,19 +62,19 @@ Once the provided web processing unit is deployed you can access the demo’s we
 
 # Architecture
 
-Feeder Processing Unit(s), utilizing Spring’s ThreadPoolTaskSchedulers, can concurrently generate a steady load of search and booking requests which are written to a remote space. The demo allows for feeders to be deployed as standard processing units or command-line java programs. By default each feeder is configured to update the space with a pool of 3 threads.
+`Feeder` Processing Unit(s), utilizing Spring’s `ThreadPoolTaskSchedulers`, can concurrently generate a steady load of search and booking requests which are written to a remote space. The demo allows for feeders to be deployed as standard processing units or command-line java programs. By default each feeder is configured to update the clustered space with a pool of three threads.
 	
-The space being updated by the feeders is embedded in a processing unit called a Processor. By default each Processor will maintain a separate partition of the “space” which is routed by the “airline” attribute. This airline attribute is required in all booking and search requests and for demo purposes is chosen from a fixed set of 4 airlines.
+The clustered space being updated by the feeders is embedded in a processing unit called a `Processor`. By default each `Processor` will maintain a separate partition of the **space cluster** which is routed by the `airline` attribute. This `airline` attribute is required in all booking and search requests and for demo purposes is chosen from a fixed set of four airlines.
 
-The Processor makes use of two polling containers each individually designated to process their respective type of request; booking and search. Once a request event has been initiated by the Feeder, a pooling container will perform a take operation to remove the request from the space and analyze its “airline” attribute. The Processor will then use the airline as a routing key to read from the appropriate partition of the embedded space and find the active timeSeries object.
+The Processor makes use of two polling containers each individually designated to process their respective type of request; booking and search. Once a request event has been initiated by the Feeder, a pooling container will perform a take operation to remove the request from the space and analyze its `airline` attribute. The Processor will then use the `airline` as a routing key to read from the appropriate partition of the space and find the active `timeSeries` object.
 
 ![time-series-1.png](/attachment_files/sbp/time-series-1.png)
 
-The timeSeries object is designed to track the amount of request occurrences for each set of source and destination airports. It does this with an embedded Map<String, Integer> attribute named “sourceDestinatinCounter”. Each timeSeries can store sourceDestination sets as a key to its map along with an Integer representing the number of occurrences within the given interval. By default a timeSeries object only remains active for 2 seconds, after which the Processor will create a new timeSeries.
+The `timeSeries` object is designed to track the amount of request occurrences for each set of source and destination airports. It does this with an embedded `Map<String, Integer>` attribute named `sourceDestinatinCounter`. Each timeSeries can store sourceDestination sets as a key to its map along with an Integer representing the number of occurrences within the given interval. By default a timeSeries object only remains active for two seconds, after which the `Processor` will create a new `timeSeries` object.
 
-The Web Processing Unit hosts a web page that is capable of rendering a graph which will chart the inactive BookingTimeSeries objects according to their sequence in time. By default, the graph will only load the last 10 inactive BookingTimeSeries objects persisted in the space. Once the initial data is loaded, the web page will begin making scheduled AJAX requests to the underlying servlet to get the next available inactive timeSeries. By default each interval will last two seconds and will be represented along the horizontal axis, t, in hours.
+The Web Processing Unit hosts a web page that is capable of rendering a graph which will chart the inactive `BookingTimeSeries` objects according to their sequence in time. By default, the graph will only load the last 10 inactive `BookingTimeSeries` objects persisted in the space. Once the initial data is loaded, the web page will begin making scheduled AJAX requests to the underlying servlet to get the next available inactive timeSeries. By default each interval will last two seconds and will be represented along the horizontal axis, `t`, in hours.
 
-For scalability the servlet will use a TaskDelegate to perform multiple tasks executed in a collocated asynchronous manner with the space. One of the tasks is purposed to retrieve all inactive timeseries which occurred after a provided interval. Since the space is partitioned this task will be broadcasted across the entire cluster and will return a result that is a reduced operation of all the different executions.This Map-Reduce pattern will aggregate all counters from the partitioned spaces and reduce them into a single TreeMap which the web page can iterate in order to load the data into the graph.
+For scalability the servlet will use a `TaskDelegate` to perform multiple tasks executed in a collocated asynchronous manner with the space. One of the tasks is purposed to retrieve all inactive timeseries which occurred after a provided interval. Since the space is partitioned this task will be broadcasted across the entire cluster and will return a result that is a reduced operation of all the different executions. This Map-Reduce pattern will aggregate all counters from the partitioned spaces and reduce them into a single `TreeMap` which the web page can iterate in order to load the data into the graph.
 
 ![time-series-3.png](/attachment_files/sbp/time-series-3.png)
 
@@ -87,7 +82,7 @@ For scalability the servlet will use a TaskDelegate to perform multiple tasks ex
 # Key Features
 
 ### Event Processing
-Each type of request has a polling container listening for a new event for request-processing and incrementing the active timeSeries’ sourceDesinationCounter.
+Each type of request has a polling container listening for a new event for request-processing and incrementing the active timeSeries’ `sourceDesinationCounter`.
 
 {%highlight java%}
 @Polling(concurrentConsumers=10)
@@ -119,7 +114,7 @@ public class BookingRequestProcessor {
 {%endhighlight%}
 
 ### Data Partitioning
-In a partitioned space, data is routed to a particular partition based on a routing property. In this system we use the airline attribute as our Routing property. This provides data affinity so that user requests and timeSeries objects are located in the same space, which minimizes latency.
+In a partitioned clustered space, data is routed to a particular partition based on a `routing property`. In this system we use the `airline` attribute as our Routing property. This provides **data affinity** so that user requests and `timeSeries` objects are located in the same space, which minimizes latency.
 
 {%highlight java%}
 public abstract class TimeSeries implements java.io.Serializable {
@@ -182,7 +177,7 @@ When a space is looking for a match for a read or take operation, it iterates ov
 |:--------|:--------|
 |ID-Based Queries| For best performance a readById operation can be used if ID is available|
 |Template Matching|The template is a POJO of the desired entry type, and the properties which are set on the template (i.e. not null) are matched against the respective properties of entries to the same type in the space. Properties with null values are ignored (not matched).|
-|SQL Query|The SQLQuery class is used to query the space using SQL-like syntax. The query statement includes only the WHERE statement part - the selection aspect of a SQL statement is embedded in other parameters for a SQL query.|
+|SQL Query|The `SQLQuery` class is used to query the space using SQL-like syntax. The query statement includes only the WHERE statement part - the selection aspect of a SQL statement is embedded in other parameters for a SQL query.|
 
 {%highlight java %}
 public class BookingTimeSeriesDAO implements IBookingTimeSeriesDAO {
@@ -211,7 +206,6 @@ public class BookingTimeSeriesDAO implements IBookingTimeSeriesDAO {
 	public void save(BookingTimeSeries bookingTimeSeries) {
 		gigaSpace.write(bookingTimeSeries, 60000);
 	}
-
 }
 {%endhighlight%}
 
@@ -229,7 +223,7 @@ public void save(BookingTimeSeries bookingTimeSeries) {
 
 ### Projection API
 
-In some cases when querying the space for objects, only specific properties of that objects are required and not the entire object (delta read). For that purpose the Projection API can be used where one can specify which properties are of interest and the space will only populate these properties with the actual data when the result is returned back to the user. This approach reduces network overhead, garbage memory generation and serialization CPU overhead.
+In some cases when querying the space for objects, only specific properties of that objects are required and not the entire object (delta read). For that purpose the `Projection API` can be used where one can specify which properties are of interest and the space will only populate these properties with the actual data when the result is returned back to the user. This approach reduces network overhead, garbage memory generation and serialization CPU overhead.
 
 {%highlight java%}
 public BookingTimeSeries readActiveTimeSeriesByAirline(String airline) {
@@ -245,7 +239,7 @@ public BookingTimeSeries readActiveTimeSeriesByAirline(String airline) {
 
 ### Change API
 
-The GigaSpace.change and the ChangeSet allows updating existing objects in space, by specifying only the required change instead of passing the entire updated object. This reduces the required network traffic between the client and the space, and the network traffic generated from replicating the changes between the space instances (e.g. between the primary space instance and its backup).
+The `GigaSpace.change()` operation and its `ChangeSet` paramter allows updating existing objects in space, by specifying only the required change instead of passing the entire updated object. This reduces the required network traffic between the client and the space, and the network traffic generated from replicating the changes between the space instances (e.g. between the primary space instance and its backup).
 
 {%highlight java%}
 public void incrementSourceDestinationCounter(BookingTimeSeries bookingTimeSeries, String sourceDestination) {
@@ -259,26 +253,19 @@ The below interface defines the available operations that can be run against the
 
 {%highlight java%}
 public interface IBookingTimeSeriesDAO {
-
 	BookingTimeSeries[] readAllCompletedTimeSeriesAfterInterval(Integer lastInterval);
-
 	BookingTimeSeries readTimeSeriesByIntervalId(Integer interval, String airline);
-
 	BookingTimeSeries readActiveTimeSeriesByAirline(String airline);
-
 	void save(BookingTimeSeries bookingTimeSeries);
-
 	BookingTimeSeries findBookingTimeSeriesWithinActiveInterval(String airline, long timeSeriesInterval);
-
 	void incrementSourceDestinationCounter(BookingTimeSeries bookingTimeSeries, String sourceDestination);
-
 	void updateCompletedStatus(BookingTimeSeries bookingTimeSeries);
 }
 {%endhighlight%}
 
 ### Map-Reduce Pattern
 
-Map-Reduce is a programming model for processing large data sets with a parallel and distributed algorithm on a cluster. A Map-Reduce program is composed of a Map () procedure that performs reads/filtering/sorting and a Reduce () procedure that performs a summary/aggregation operation. Map-Reduce works by marshalling the distributed servers, running the various tasks in parallel, managing all communications and data transfers between the various parts of the system, and providing for redundancy and fault tolerance.
+Map-Reduce is a programming model for processing large data sets with a parallel and distributed algorithm on a cluster. A Map-Reduce program is composed of a `Map()` procedure that performs reads/filtering/sorting and a `Reduce()` procedure that performs a summary/aggregation operation. Map-Reduce works by marshalling the distributed servers, running the various tasks in parallel, managing all communications and data transfers between the various parts of the system, and providing for redundancy and fault tolerance.
 
 **Map step:** The master node takes the input, divides it into smaller sub-problems, and distributes them to worker nodes. A worker node may do this again in turn, leading to a multi-level tree structure. The worker node processes the smaller problem, and passes the answer back to its master node.
 
@@ -297,7 +284,7 @@ Phase 2 - Getting the results back to be reduced:
 
 #### Task Execution
 
-XAP comes with support for executing tasks in a collocated asynchronous manner with the Space. Tasks can be executed directly on a specific cluster member using typical routing declarations. They can also be executed concurrently in “broadcast” mode on all primary cluster members and reduced to a single result on the client side. Tasks are completely dynamic both in terms of content and class definitions.
+XAP comes with support for executing tasks in a collocated asynchronous manner with the Space. Tasks can be executed directly on a specific cluster member using typical routing declarations. They can also be executed concurrently in `broadcast` mode on all primary cluster members and reduced to a single result on the client side. Tasks are completely dynamic both in terms of content and class definitions.
 
 {%highlight java%}
 @AutowireTask
@@ -347,7 +334,7 @@ public class DetermineInitialIntervalTask implements Task<Integer> {
 
 **Distributed Tasks**
 
-A Distributed Task is a task that ends up executing more than once (concurrently) and returns a result that is a reduced operation of all the different executions. This type of task is used as the implementation of the Map-Reduce Pattern provided by GigaSpaces. For this demo, it will be used to read all inactive timesSeries objects for a given airline which occurred after the provided interval. Each partition will combine the resultant timeSeries’ into a TreeMap and return the reduction to the remote client for aggregation.
+A `Distributed Task` is a task that ends up executing more than once (concurrently) and returns a result that is a reduced operation of all the different executions. This type of task is used as the implementation of the Map-Reduce Pattern provided by XAP. For this demo, it will be used to read all inactive timesSeries objects for a given airline which occurred after the provided interval. Each partition will combine the resultant timeSeries’ into a `TreeMap` and return the reduction to the remote client for aggregation.
 
 
 {%highlight java%}
@@ -392,10 +379,7 @@ public class RetrieveCompletedBookingTimeSeriesTask implements DistributedTask<B
 						if(bookingTimeSeries != null) {
 							AirportDataUtils.updateAirportMap(bookingTimeSeries, airports);
 						}
-					}
-				}
-			}
-    		}
+					}}}}
 
 		return airports;
     	}
@@ -410,21 +394,21 @@ public class RetrieveCompletedBookingTimeSeriesTask implements DistributedTask<B
 }
 {%endhighlight%}
 
-Task Resource Injection
-A task might need to make use of resources defined within an external processing unit (which may be collocated with the Space). In our case, the task has a reference to a DAO interface but no access to the implementation. In order for the task to successfully operate in runtime its code will need to be injected into the processing unit which hosts the DAO implementation as well as the Space itself.
+### Task Resource Injection
+A `Task` might need to make use of resources defined within an external processing unit (which may be collocated with the Space). In our case, the task has a reference to a `DAO` interface but no access to the implementation. In order for the task to successfully operate in runtime its code will need to be injected into the processing unit which hosts the DAO implementation as well as the Space itself.
 
-An executed Task goes through the same lifecycle as any bean defined within an external processing unit even though its bean definition is not present. Thanks to this fact, injecting resources can be done using annotations (@Autowired and @Resource).
+An executed `Task` goes through the same lifecycle as any bean defined within an external processing unit even though its bean definition is not present. Thanks to this fact, injecting resources can be done using annotations (`@Autowired` and `@Resource`).
 
 {%highlight java%}
-	@Resource
-	private transient IBookingTimeSeriesDAO bookingTimeSeriesDAO;
+@Resource
+private transient IBookingTimeSeriesDAO bookingTimeSeriesDAO;
 {%endhighlight%}
 
 
-### Jetty Processing Unit Container
-XAP’s web processing unit can use Jetty as the web container that will actually run the WAR file deployed onto the Service Grid. Jetty itself comes built in with the GigaSpaces installation. This integration allows you to run your embedded data (Space), business logic and web packages inside the same processing unit. Or you can simply run a pure WAR file in a non-Spring and Spring environment.
+### Web Processing Unit Container
+XAP’s web processing unit run the `WAR` file deployed onto the Service Grid. The Web Processing Unit Container allows you to run your embedded data (Space), business logic and web packages inside the same processing unit or within the same Service Grid. Or you can simply run a pure standard `WAR` file in a non-Spring and Spring configuration.
 
-In this demo, we are using the Jetty web container to host the web tier as a remote processing unit. Its servlet uses a TaskDelegate pattern to orchestrate regular and distributed tasks which will be executed within the external processing unit hosting the embedded space. It makes use of Task Resource Injection to access the implementation of the DAO interface and Task Routing to execute inside the correct partition
+In this demo, we are using the Web Processing Unit Container to host the web tier as a remote client to the space. Its servlet uses a `TaskDelegate` pattern to orchestrate regular and distributed tasks which will be executed within the space. It makes use of `Task` Resource Injection to access the implementation of the DAO interface and Task Routing to execute within the correct space partition.
 {%highlight java%}
 public class TimeSeriesServlet extends HttpServlet {
 
@@ -465,9 +449,9 @@ public class TimeSeriesServlet extends HttpServlet {
 {%endhighlight%}
 
 ### SLA-Driven Capabilities
-The XAP runtime environment provides SLA-driven capabilities via the GSM and the GSC runtime components. The GSC is responsible for running one or more Processing Units; while the GSM is responsible for analyzing the deployment and provisioning the processing unit instances to the available GSCs. The SLA definitions can be provided as part of the processing unit package or during the processing unit’s deployment process. They define the number of processing unit instances that should be running and deploy-time requirements such as the amount of free memory or CPU or the clustering topology for processing units which contain a space. The GSM reads the SLA definition, and deploys the processing unit onto the available GSCs according to it.
+The XAP runtime environment provides SLA-driven capabilities via the `GSM` and the `GSC` runtime components. The `GSC` is responsible for running one or more Processing Units; while the GSM is responsible for analyzing the deployment and provisioning the processing unit instances to the available `GSCs`. The `SLA` definitions can be provided as part of the processing unit package or during the processing unit’s deployment process. They define the number of processing unit instances that should be running and deploy-time requirements such as the amount of free memory or CPU or the clustering topology for processing units which contain a space. The `GSM` reads the SLA definition, and deploys the processing unit onto the available GSCs according to it.
 
-This demo will use a sla.xml file which contains the SLA definitions within the processing unit’s jar file. This file can be located under the META-INF/spring directory, alongside the processing unit’s pu.xml file.
+This demo will use a `sla.xml` file which contains the SLA definitions within the processing unit’s jar file. This file can be located under the `META-INF/spring` directory, alongside the processing unit’s `pu.xml` file.
 {%highlight xml%}
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -476,16 +460,7 @@ This demo will use a sla.xml file which contains the SLA definitions within the 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
        			   http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/9.1/sla/openspaces-sla.xsd">
 
-    <!--
-        The SLA bean is used while deploying this processing unit to the Service Grid.
-
-        The SLA uses a partitioned schema with primary and backup.
-        It will create 8 partitions each with a single backup.
-
-        The SLA bean also mandates that a primary and a backup won't run under the same
-        GSC by setting the maxInstancesPerVM to 1.
-    -->
-    <os-sla:sla cluster-schema="partitioned-sync2backup" number-of-instances="8" number-of-backups="1"
+    <os-sla:sla cluster-schema="partitioned-sync2backup" number-of-instances="2" number-of-backups="1"
                 max-instances-per-vm="1">
     </os-sla:sla>
 
@@ -495,23 +470,33 @@ This demo will use a sla.xml file which contains the SLA definitions within the 
 
 # Running the Demo
 
-1.	Download the [realTimeAnalyticsTimeSeries.zip](/download_files/sbp/realTimeAnalyticsTimeSeries.rar) file and extract it into a folder named realTimeAnalyticsTimeSeries.
-2.	Edit setenv.bat and change JAVA_HOME and JSHOMEDIR
-3.	Add maven\bin to your path if you don’t have it already installed
-4.	Run \gigaspaces-xap-premium-9.7.0-ga\tools\maven\installmavenrep.bat
-5.	Build the demo by running the following command: mvn package
-6.	Execute the demo by running the start and deploy scripts in the following order:
-o	gs-agent.bat: starts 1 GSA, 2 GSCs, 1 GSM and 1 LUS
-o	gs-ui.bat: starts the GigaSpaces Management Center
-7.	Deploy Applications{%wbr%}
-    	Find the “Launch” menu at the top of the GS Management Center UI{%wbr%}
-	    Choose “SBA Application – Processing Unit” from the drop-down {%wbr%}
-    	At the top of the Deployment Wizard browse for the listed directory and choose the jar/war file (You do not need to alter the deployment options) Just click the  Deploy button on the bottom {%wbr%}
+1.	Download the [realTimeAnalyticsTimeSeries.zip](/download_files/sbp/realTimeAnalyticsTimeSeries.rar) file and extract it into a folder named `realTimeAnalyticsTimeSeries`.
+2.	Update setenv.bat to have the right value for `JAVA_HOME` and `JSHOMEDIR` variables
+3.	Add `maven\bin` to your path if you don’t have it already installed and run: 
+{%highlight java%}
+\gigaspaces-xap-premium-9.7.x-ga\tools\maven\installmavenrep.bat
+{%endhighlight%}
+4.	Build the demo by running the following command: 
+{%highlight java%}
+mvn package
+{%endhighlight%}
+5.	Execute the demo by running the start and deploy scripts in the following order:
+Start 1 GSA, 2 GSCs, 1 GSM and 1 LUS
+{%highlight java%}
+gs-agent.bat
+{%endhighlight%}
+Start the GigaSpaces Management Center:
+{%highlight java%}
+gs-ui.bat: 
+{%endhighlight%}
+6.	Deploy Applications{%wbr%}
+    	Find the `Launch` menu at the top of the GS Management Center UI{%wbr%}
+	Choose “SBA Application – Processing Unit” from the drop-down {%wbr%}
+    	At the top of the Deployment Wizard browse for the listed directory and choose the jar/war file (You do not need to alter the deployment options) Just click the `Deploy` button on the bottom {%wbr%}
         1)	realTimeAnalyticsTimeSeries\processor\target\my-app-processor.jar {%wbr%}
         2)	realTimeAnalyticsTimeSeries\feeder\target\my-app-feeder.jar  {%wbr%}
         3)	realTimeAnalyticsTimeSeries\web\target\my-app-web.war {%wbr%}
-8.	Connect to the web page by using your browser (http://host:port/my-app-web/index.jsp)
-
+7.	Connect to the web page and access the Dashboard by pointing your browser to: (`http://host:port/my-app-web/index.jsp`)
 
 # Monitoring Space and Stats
 
