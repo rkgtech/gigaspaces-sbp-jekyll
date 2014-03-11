@@ -55,7 +55,7 @@ The User Interface for this demo will mock an **Airline Flight Operations Dashbo
 
 ## Visual Time Series with Real Time Analytics
 
-Once the provided web processing unit is deployed you can access the demo’s web page at `http://host:port/my-app-web/index.jsp.` It will display the generic airline’s top-5 predetermined source and destinations airport sets in the left panel. Upon load, the rendered graph will show a time series in the form of a line chart. Its initial data will be limited to the last 10 inactive intervals that reside in the space. The graph can be altered on the fly in the form of area, bar and scatter charts (shown below). Once the loading process is complete the graph will update itself every 2 seconds showing the latest inactive interval along the time series; capturing the booking requests performed by the mocked users.
+Once the provided web processing unit is deployed you can access the demo’s web page at `http://host:port/my-app-web/index.jsp.` (i.e. `http://localhost:8080/my-app-web/index.jsp`)  It will display the generic airline’s top-5 predetermined source and destinations airport sets in the left panel. Upon load, the rendered graph will show a time series in the form of a line chart. Its initial data will be limited to the last 10 inactive intervals that reside in the space. The graph can be altered on the fly in the form of area, bar and scatter charts (shown below). Once the loading process is complete the graph will update itself every 2 seconds showing the latest inactive interval along the time series; capturing the booking requests performed by the mocked users.
 
 ![time-series-2.png](/attachment_files/sbp/time-series-2.png)
 
