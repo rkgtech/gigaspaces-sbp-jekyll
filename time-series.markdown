@@ -470,17 +470,24 @@ This demo will use a `sla.xml` file which contains the SLA definitions within th
 
 # Running the Demo
 
-1.	Download the [realTimeAnalyticsTimeSeries.zip](/download_files/sbp/realTimeAnalyticsTimeSeries.rar) file and extract it into a folder named `realTimeAnalyticsTimeSeries`.
-2.	Update setenv.bat to have the right value for `JAVA_HOME` and `JSHOMEDIR` variables
-3.	Add `maven\bin` to your path if you don’t have it already installed and run: 
+Step 1.	Download the [realTimeAnalyticsTimeSeries.zip](/download_files/sbp/realTimeAnalyticsTimeSeries.rar) file and extract it into a folder named `realTimeAnalyticsTimeSeries`.{%wbr%}
+
+Step 2.	Update setenv.bat to have the right value for `JAVA_HOME` and `JSHOMEDIR` variables {%wbr%}
+
+Step 3.	Add `maven\bin` to your path if you don’t have it already installed and run: {%wbr%}
+
 {%highlight java%}
 \gigaspaces-xap-premium-9.7.x-ga\tools\maven\installmavenrep.bat
 {%endhighlight%}
-4.	Build the demo by running the following command: 
+
+Step 4.	Build the demo by running the following command:
+
 {%highlight java%}
 mvn package
 {%endhighlight%}
-5.	Execute the demo by running the start and deploy scripts in the following order:
+
+Step 5.	Execute the demo by running the start and deploy scripts in the following order: {%wbr%}
+
 Start 1 GSA, 2 GSCs, 1 GSM and 1 LUS
 {%highlight java%}
 gs-agent.bat
@@ -489,14 +496,17 @@ Start the GigaSpaces Management Center:
 {%highlight java%}
 gs-ui.bat
 {%endhighlight%}
-6.	Deploy Applications{%wbr%}
+
+
+Step 6.	Deploy Applications{%wbr%}
     	Find the `Launch` menu at the top of the GS Management Center UI{%wbr%}
 	Choose “SBA Application – Processing Unit” from the drop-down {%wbr%}
     	At the top of the Deployment Wizard browse for the listed directory and choose the jar/war file (You do not need to alter the deployment options) Just click the `Deploy` button on the bottom {%wbr%}
         1)	realTimeAnalyticsTimeSeries\processor\target\my-app-processor.jar {%wbr%}
         2)	realTimeAnalyticsTimeSeries\feeder\target\my-app-feeder.jar  {%wbr%}
         3)	realTimeAnalyticsTimeSeries\web\target\my-app-web.war {%wbr%}
-7.	Connect to the web page and access the Dashboard by pointing your browser to: (`http://host:port/my-app-web/index.jsp`)
+
+Step 7.	Connect to the web page and access the Dashboard by pointing your browser to: (`http://host:port/my-app-web/index.jsp`)
 
 # Monitoring Space and Stats
 
