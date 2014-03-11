@@ -487,7 +487,7 @@ gs-agent.bat
 {%endhighlight%}
 Start the GigaSpaces Management Center:
 {%highlight java%}
-gs-ui.bat: 
+gs-ui.bat
 {%endhighlight%}
 6.	Deploy Applications{%wbr%}
     	Find the `Launch` menu at the top of the GS Management Center UI{%wbr%}
