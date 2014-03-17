@@ -690,7 +690,7 @@ The GigaSpaces LRMI layer opens network connections dynamically. With large scal
 
 You might have multiple JVMs running on the machine. This might need to increase the default max user processes value.
 
-The Linux OS by default has a relatively small number of file descriptors available and max user processes (1024). You should make sure that your standalone clients, or GSA/GSM/GSC/LUS using a user account which have its **maximum open file descriptors ** (open files) and **max user processes** configured to a high value. A good value is 32768.
+The Linux OS by default has a relatively small number of file descriptors available and max user processes (1024). You should make sure that your standalone clients, or GSA/GSM/GSC/LUS using a user account which have its **maximum open file descriptors (open files) and max user processes** configured to a high value. A good value is 32768.
 
 Setting the **max open file descriptors** and **max user processes** is done via the following call:
 
