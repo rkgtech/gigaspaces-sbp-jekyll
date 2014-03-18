@@ -41,8 +41,11 @@ The web service performs the following space operations:
 # Running the Web Service
 
 Step 1. Download the [Web Service WAR file](/attachment_files/sbp/CustomerServicePort.war).
+
 Step 2. Download the [Web Service project](/attachment_files/sbp/WebServicePU.zip). This includes the entire source code for the client and the web service.
+
 Step 3. Setup the application project class path libraries. See the [Client Application Project jars](#Client Application Project jars) for details.
+
 Step 4. Start GigaSpaces agent.
 
 {% highlight java %}
