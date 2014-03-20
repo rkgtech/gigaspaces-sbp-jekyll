@@ -67,7 +67,7 @@ With the [attached example](/attachment_files/sbp/LargeDBLRUSpace.zip) the clust
 - 200 object loaded into partition 2.
 - 300 object loaded into partition 3.
 
-The clustered space using a dummy External Data Source. it does not leveraging any database. It prints a message when the space needs to access the database to retrieve data.
+The clustered space is using a dummy External Data Source. It does not leverage any database. It prints a message when the space needs to access the database to retrieve data.
 
 The client performs 3 types of queries:
 
