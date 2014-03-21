@@ -17,7 +17,7 @@ weight: 800
 
 # Overview
 
-When having an application using a very large backend database leveraging the IMDG, caching a subset of the application data, while running on-going data eviction policy with read-through policy (i.e. LRU cache policy mode with an  External-Data-Source used), the main requirement is to **access the database in the most optimal manner** when performing queries against the IMDG.
+When having an application using a very large backend database leveraging the IMDG, caching a subset of the application data, while running on-going data eviction policy with read-through policy (i.e. LRU cache policy mode with an External-Data-Source used), the main requirement is to **access the database in the most optimal manner** when performing queries against the IMDG.
 
 When using `readById` or `readByIds` operations looking for a single specific object(s), that cannot be found within the IMDG (a cache miss), the database access is very minimal. Only one raw is retrieved from the database per object lookup activity via the space External Data Source (EDS) implementation.
 
@@ -29,7 +29,7 @@ But when performing queries, using `readMultiple` with a template or SQLQuery fi
 - Database access involves reading objects that will not be loaded into the space (non-matching routing value).
 
 # Solution
-The main motivation with the solution proposed below, is to have better control when a space partition accessing the database. The space is inspected prior retrieving the data leveraging the ability to count matching objects to a given query very fast (via the in-memory indexes the space maintains). If there are adequate amount of matching objects, the client accessing the relevant space partition(s) and retrieving the data from the space without accessing the database.
+The main motivation with the solution proposed below, is to have better control when a space partition is accessing the database. The space is inspected prior retrieving the data leveraging the ability to count matching objects to a given query very fast (via the in-memory indexes the space maintains). If there is an adequate amount of matching objects, the client will access the relevant space partition(s) and retrieve the data from the space without accessing the database.
 
 Here is the full query execution strategy:
 
@@ -49,7 +49,7 @@ Here is the full query execution strategy:
 {% endindent %}
 
 ## Data Eviction Options
-To control the data within the space should evict it. Evicting data from the space can be done using the following options:
+Evicting data from the space can be done using the following options:
 
 - LRU Cache policy - The simplest way to evict data based on available memory. Built-in option.
 - Lease - Space objects expire based on TTL specified once the object is written into the space.
@@ -77,7 +77,7 @@ The client performs 3 types of queries:
 
 ## Running the Example
 
-To run the example you should first run the IMDG and later run the client. the example below explains how to run these within the IDE, but you can also modify these to run as a PU and deploy these into the GigaSpaces runtime environment.
+To run the example you should first run the IMDG and later run the client. The example below explains how to run these within the IDE, but you can also modify these to run as a PU and deploy these into the GigaSpaces runtime environment.
 
 ### Running the IMDG
 
