@@ -52,7 +52,7 @@ export NIC_ADDR=10.10.10.100
 With the above approach, you can leverage multiple network cards within the same machine to provide a higher level of hardware resiliency, and utilize the network bandwidth in an optimal manner, by binding different JVM processes running on the same physical machine to different IP addresses. One example of this would be four GSCs running on the same machine, where two of the them are using IP_1 and the other two are using IP_2.
 {% endtip %}
 
-{% exclamation %} For more information, see [How to Configure an Environment With Multiple Network-Cards (Multi-NIC)]({%latestjavaurl%}/how-to-configure-an-environment-with-multiple-network-cards-(multi-nic).html)
+{% exclamation %} For more information, see [How to Configure an Environment With Multiple Network-Cards (Multi-NIC)]({%latestadmurl%}/network-multi-nic.html)
 
 # Ports
 GigaSpaces uses TCP/IP for most of its remote operations. The following components within GigaSpaces require open ports:
@@ -61,10 +61,10 @@ GigaSpaces uses TCP/IP for most of its remote operations. The following componen
 | Service | Description | Configuration Property | Default value |Comment|
 |:--------|:------------|:-----------------------|:--------------|:------|
 |[Lookup Service listening port](/product_overview/the-lookup-service.html) |Used as part of the lookup discovery protocol.|`com.sun.jini.reggie.initialUnicastDiscoveryPort` System property|XAP 6: **4162**{% wbr %}XAP 7: **4164**{% wbr %}XAP 8: **4166**| |
-|[LRMI listening port]({%latestjavaurl%}/communication-protocol.html)|Used with client-space and space-space communication. |`com.gs.transport_protocol.lrmi.bind-port` System property. |variable, random| |
+|[LRMI listening port]({%latestadmurl%}/tuning-communication-protocol.html)|Used with client-space and space-space communication. |`com.gs.transport_protocol.lrmi.bind-port` System property. |variable, random| |
 |RMI registry listening port |Used as an alternative directory service.| `com.gigaspaces.system.registryPort` System property|10098 and above.| |
 |Webster listening port|Internal web service used as part of the application deployment process. |`com.gigaspaces.start.httpPort` System property|9813| |
-|[Web UI Agent]({%latestjavaurl%}/web-management-console.html)|GigaSpaces Dashboard Web Application. | `com.gs.webui.port` System property|8099| |
+|[Web UI Agent]({%latestadmurl%}/web-management-console.html)|GigaSpaces Dashboard Web Application. | `com.gs.webui.port` System property|8099| |
 
 Here are examples of how to set different LRMI listening ports for the GS-UI, and another set of ports for the GSA/GSC/GSM/Lookup Service:
 
@@ -84,7 +84,7 @@ When there are several GSCs running on the same machine, or several servers runn
 
 # Client LRMI Connection Pool and Server LRMI Connection Thread Pool
 
-The [GigaSpaces LRMI]({%latestjavaurl%}/communication-protocol.html) uses two independent resource pools working collaboratively allowing a client to communicate with a server in a scalable manner. The client connection pool is configured via the `com.gs.transport_protocol.lrmi.max-conn-pool` and a server connection thread pool is configured via the `com.gs.transport_protocol.lrmi.max-threads`, both should be configured on the server side as system properties. You may configure these two pools' sizes and their resource timeouts to provide maximum throughput and low latency when a client communicates with a server. The default LRMI behavior will open a different connection at the client side and start a connection thread at the server side, once a multithreaded client accesses a server component. All client connections may be shared between all the client threads when communicating with the server. All server side connection threads may be shared between all client connections.
+The [GigaSpaces LRMI]({%latestadmurl%}/tuning-communication-protocol.html) uses two independent resource pools working collaboratively allowing a client to communicate with a server in a scalable manner. The client connection pool is configured via the `com.gs.transport_protocol.lrmi.max-conn-pool` and a server connection thread pool is configured via the `com.gs.transport_protocol.lrmi.max-threads`, both should be configured on the server side as system properties. You may configure these two pools' sizes and their resource timeouts to provide maximum throughput and low latency when a client communicates with a server. The default LRMI behavior will open a different connection at the client side and start a connection thread at the server side, once a multithreaded client accesses a server component. All client connections may be shared between all the client threads when communicating with the server. All server side connection threads may be shared between all client connections.
 
 {% indent %}
 [<img src="/attachment_files/sbp/lrmi_archi2.jpg" width="120" height="80">](/attachment_files/sbp/lrmi_archi2.jpg)
@@ -113,7 +113,7 @@ or by lowering the `com.gs.transport_protocol.lrmi.max-conn-pool` value.
 The LRMI connection thread pool is a server side component. It is in charge of executing the incoming LRMI invocations. It is a single thread pool within the JVM that executes all the invocations, from all the clients and all the replication targets.
 
 {% tip %}
-In some cases you might need to increase the LRMI Connection thread pool maximum size. Without this tuning activity, the system might hang in case there would be large amount of concurrent access. See the [LRMI Configuration]({%latestjavaurl%}/communication-protocol.html#LRMI+Configuration) for details about the GigaSpaces Communication Protocol options. Using a value as **1024** for the LRMI Connection Thread Pool should be sufficient for most large scale systems.
+In some cases you might need to increase the LRMI Connection thread pool maximum size. Without this tuning activity, the system might hang in case there would be large amount of concurrent access. See the [LRMI Configuration]({%latestadmurl%}/tuning-communication-protocol.html#LRMI+Configuration) for details about the GigaSpaces Communication Protocol options. Using a value as **1024** for the LRMI Connection Thread Pool should be sufficient for most large scale systems.
 {% endtip %}
 
 # Lookup Locators and Groups
@@ -486,7 +486,7 @@ For applications that are using relatively large amount of third party libraries
 
 {% exclamation %} GigaSpaces is a Java-based product. .Net and C++ applications using GigaSpaces should also be aware the usage of the JVM libraries as part of the .Net and C++ client libraries.
 
-See the [Tuning Java Virtual Machines]({%latestjavaurl%}/tuning-java-virtual-machines.html) section and the [Java SE 6 HotSpot Virtual Machine Garbage Collection Tuning](http://java.sun.com/javase/technologies/hotspot/gc/gc_tuning_6.html) for detailed JVM tuning recommendations.
+See the [Tuning Java Virtual Machines]({%latestadmurl%}/tuning-java-virtual-machines.html) section and the [Java SE 6 HotSpot Virtual Machine Garbage Collection Tuning](http://java.sun.com/javase/technologies/hotspot/gc/gc_tuning_6.html) for detailed JVM tuning recommendations.
 
 # Space Memory Management
 The Space supports two [Memory Management]({%latestjavaurl%}/memory-management-facilities.html) modes:

@@ -259,7 +259,7 @@ The master-slave topology configuration is simply implemented through delegators
 2. Please extract the file and and copy the content of the **deploy** folder into `\<GIGASPACES_HOME>\deploy` folder.
 3. Extract the `scripts` folder to an arbitrary location and edit the `setExampleEnv.bat/sh` script to include correct values for `NIC_ADDR` as the machine IP and `JSHOMEDIR` as the GigaSpaces root folder location.
 
-The `scripts` folder contains the necessary scripts to start the [Grid Service Agent]({%latestjavaurl%}/service-grid.html#gsa) for each cluster, in addition to a deploy script `deployAll.bat/sh` which will be used to automate the deployment of all three gateways and space instances. This will allow you to run the entire setup on one machine to simplify testing. Here are the steps to run the example:
+The `scripts` folder contains the necessary scripts to start the [Grid Service Agent](/product_overview/service-grid.html#gsa) for each cluster, in addition to a deploy script `deployAll.bat/sh` which will be used to automate the deployment of all three gateways and space instances. This will allow you to run the entire setup on one machine to simplify testing. Here are the steps to run the example:
 
 1. Run `startAgent-GB.bat/sh` or to start GB site.
 2. Run `startAgent-HK.bat/sh` to start HK site.
@@ -290,7 +290,7 @@ If you are using the GS-WEBUI, you can also view the site topology through the "
 
 # Testing Master-Slave Replication
 
-You can test the setup by using the [benchmark utility]({%latestjavaurl%}/benchmark-view---gigaspaces-browser.html) comes with the GS-UI. Select the US Benchmark icons and click Start to begin writing objects to the space:
+You can test the setup by using the [benchmark utility]({%latestadmurl%}/benchmark-browser.html) comes with the GS-UI. Select the US Benchmark icons and click Start to begin writing objects to the space:
 [<img src="/attachment_files/sbp/masterslave_space_write.png" width="140" height="100">](/attachment_files/sbp/masterslave_space_write.png)
 
 

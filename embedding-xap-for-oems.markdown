@@ -14,7 +14,7 @@ GigaSpaces XAP can be used as a self contained application platform in which cas
 
 # General Description
 
-Embedding GigaSpaces cluster can be as simple as starting the [GigaSpaces Agent]({%latestjavaurl%}/service-grid.html#gsa) in each machine.
+Embedding GigaSpaces cluster can be as simple as starting the [GigaSpaces Agent](/product_overview/service-grid.html#gsa) in each machine.
 The agent is responsible for bootstrapping the GigaSpaces cluster environment implicitly. The agent uses a peer to peer communication between themselves to ensure that the environment is up and running also in an  event of a failure.
 
 Once the agent get started you can start using the [GigaSpaces Elastic middleware]({%latestjavaurl%}/elastic-processing-unit.html) directly from your application.
@@ -36,7 +36,7 @@ In a UNIX environment, you might install it into `/usr/local/`, which would resu
 
 ## Running the GigaSpaces Agent
 
-A GigaSpaces node is best facilitated through the use of a service called the "[Grid Service Agent]({%latestjavaurl%}/service-grid.html#gsa)," or GSA.
+A GigaSpaces node is best facilitated through the use of a service called the "[Grid Service Agent](/product_overview/service-grid.html#gsa)," or GSA.
 
 The simplest way to start a node with GigaSpaces is just to invoke the GSA in the GigaSpaces home directory, preferably in its own command shell (although you can easily start a background process with `start` or `nohup` if desired):
 

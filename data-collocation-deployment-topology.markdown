@@ -6,7 +6,7 @@ parent: production.html
 weight: 300
 ---
 
-{% compositionsetup %}
+
 
 {% summary %}Choosing the right data-collocation deployment topology - to Collocate or not to Collocate?{% endsummary %}
 
@@ -16,11 +16,11 @@ JDK:**Sun JDK 1.6**
 Date: September 2009
 
 # The ABCs of the Processing Unit
-GigaSpaces XAP includes a universal grid-based runtime environment for real-time extreme transaction processing (XTP) for Java, C++ and .Net applications. The runtime environment includes a Service Level Agreement-based container called a [GSC]({%latestjavaurl%}/service-grid.html#gsc), in which you are able to deploy business logic and stateful data.
+GigaSpaces XAP includes a universal grid-based runtime environment for real-time extreme transaction processing (XTP) for Java, C++ and .Net applications. The runtime environment includes a Service Level Agreement-based container called a [GSC](/product_overview/service-grid.html#gsc), in which you are able to deploy business logic and stateful data.
 
 When your business logic and its state are managed by the GigaSpaces runtime components, they are able to self-heal in the case of a failure via the continuous high-availability mechanism of the system. They can dynamically scale themselves by configuration or by a programmable API - all out-of-the-box.
 
-The actual deployment is done via a dedicated service called the [GSM]({%latestjavaurl%}/service-grid.html#gsm), which is responsible for the deployment process and for enforcing the pre-defined SLA (if any) throughout the lifecycle of the application.
+The actual deployment is done via a dedicated service called the [GSM](/product_overview/service-grid.html#gsm), which is responsible for the deployment process and for enforcing the pre-defined SLA (if any) throughout the lifecycle of the application.
 
 The application code running within the GSC should be compiled, packaged into a library, and deployed via the relevant deploy command/API/UI. The GSM is responsible for pushing the application libraries into all the machines running the GSC at deployment, when scaling the system, or when there is a failure that requires the system to use a new available GSC. Once the application libraries have been deployed to the GSC, the container loads the application, initializes it, and then starts the application. You can use external parameters in the deployment and get the status of the business logic and its state via the relevant [administration API]({%latestjavaurl%}/administration-and-monitoring-api.html), or the provided administration tools.
 

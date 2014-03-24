@@ -64,7 +64,7 @@ The **Create View** option allows you to create a view of space data inside your
 - It is possible to connect to any running space in your network.
 To connect to a space:
     1. Click the **Connect** button.
-    1. In the Connect to Space dialog box, type the [space URL]({%latestjavaurl%}/space-url.html). The general format of the space URL is:
+    1. In the Connect to Space dialog box, type the [space URL]({%latestjavaurl%}/the-space-configuration.html). The general format of the space URL is:
     {% highlight java %}
         <protocol>://<host name>:<port>/<container name>/<space name>?<properties>
     {% endhighlight %}

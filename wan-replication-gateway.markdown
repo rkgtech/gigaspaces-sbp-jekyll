@@ -81,7 +81,7 @@ Once deployed successfully you should see this:
 [<img src="/attachment_files/sbp/wan_example6.jpg" width="140" height="100">](/attachment_files/sbp/wan_example6.jpg)
 
 # Testing the WAN Gateway Replication
-You can test the setup by using the [benchmark utility]({%latestjavaurl%}/benchmark-view---gigaspaces-browser.html) comes with the GS-UI. Move the one of the Clusters Benchmark icon and click the Start Button:
+You can test the setup by using the [benchmark utility]({%latestadmurl%}/benchmark-browser.html) comes with the GS-UI. Move the one of the Clusters Benchmark icon and click the Start Button:
 [<img src="/attachment_files/sbp/wan_example7.jpg" width="140" height="100">](/attachment_files/sbp/wan_example7.jpg)
 
 You will see all spaces **Object Count** across all clusters by clicking the **Spaces icon** on the Space Browser Tab. You should see identical number of objects (5000) for all members:
