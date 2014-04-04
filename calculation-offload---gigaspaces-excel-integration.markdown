@@ -29,7 +29,7 @@ As a first step, you need to load your data from its current source to the space
 
 GigaSpaces provides [OpenSpaces](/product_overview/index.html) as its main API. However, it is also possible to load data from different types of applications transparently, using different connectors implemented by GigaSpaces:
 
-- For messaging-based applications, refer to the [JMS]({%latestjavaurl%}/jms---basics.html) section.
+- For messaging-based applications, refer to the [JMS]({%latestjavaurl%}/messaging-support.html) section.
 - If your application is an external data source (like a database), refer to the [Persistency]({%latestjavaurl%}/space-persistency.html) section.
 
 ## 2 -- Implementing Algorithm

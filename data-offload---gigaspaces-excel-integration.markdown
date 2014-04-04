@@ -6,7 +6,7 @@ parent: excel-that-scales-solution.html
 weight: 200
 ---
 
-{% summary page|65 %}Using the data offload pattern.{% endsummary %}
+{% summary  %}Using the data offload pattern.{% endsummary %}
 
 # Overview
 
@@ -24,7 +24,7 @@ As a first step, you need to load all your data from its current source to the s
 
 GigaSpaces provides [OpenSpaces](/product_overview/product-architecture.html#ProductArchitecture-OpenSpacesAPIandComponents) as its main API. However, it is also possible to load data from different types of applications transparently, using different connectors implemented by GigaSpaces:
 
-- For messaging-based applications, refer to the [JMS]({%latestjavaurl%}/jms---basics.html) section.
+- For messaging-based applications, refer to the [JMS]({%latestjavaurl%}/messaging-support.html) section.
 - If your application is an external data source (like a database), refer to the [External Data Source]({%latestjavaurl%}/space-data-source-api.html) section.
 
 ## 2 -- Loading Data Subset to Excel
