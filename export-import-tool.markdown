@@ -25,7 +25,7 @@ With this tool we will demonstrate how to export data from a space via serializi
 
 ### Download the Export/Import Example
 
-You can download the example project from [here](/download_files/sbp/Export_Tool.zip) and unzip into an empty folder.
+You can download the example project from [here](/download_files/Export_Tool.zip) and unzip into an empty folder.
 
 
 ### Running the Example
