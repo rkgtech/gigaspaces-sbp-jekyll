@@ -18,14 +18,14 @@ weight: 50
 With this tool we will demonstrate how to export data from a space via serializing it to a file. We can then re-import the data back into the space. The tool executes distributed tasks in 'preprocess' mode, which reads the serialization files and returns a de-duplicated list of the classes only.
 
 
-![xap-export-import.png](pics/xap-export-import.png)
+![xap-export-import.png](/attachment_files/import-export-tool.jpg)
 
 
 # Getting started
 
 ### Download the Export/Import Example
 
-You can download the example project from [here](download_files/Export_Tool.zip) and unzip into an empty folder.
+You can download the example project from [here](/download_files/sbp/Export_Tool.zip) and unzip into an empty folder.
 
 
 ### Running the Example
