@@ -97,6 +97,7 @@ This section contains GigaSpaces XAP known patterns, solutions and best practice
 {: .table .table-bordered}
 | Pattern | Level | Description |
 |:--------------|:------|:------------|
+|[Exporting/Import data](./export-import-tool.html) | Beginner | Export and import data from / into a space.|
 |[Elastic Distributed Calculation Engine](./elastic-distributed-calculation-engine.html)|Advanced| Elastic Distributed Calculation Engine implementation using Map-Reduce approach.|
 |[Trading Settlement](./trading-settlement.html) |Advanced| A trading settlement system where the entire tier-based architecture is built on GigaSpaces.|
 |[Mainframe Integration](./mainframe-integration.html) |Advanced| GigaSpaces XAP can simplify the migration effort from mainframe based systems and reduce the cost of the legacy applications. GigaSpaces XAP act as a front-end layer for mainframe based systems may boost the system performance and improve the overall system response time on peak load.|
