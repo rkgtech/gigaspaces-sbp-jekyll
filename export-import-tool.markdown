@@ -8,7 +8,7 @@ weight: 50
 
 
 {% tip %}
- **Author**:Shay Hasidim, John Burke<br/>
+ **Author**:Shay Hasidim, John Burke, Christos Erototcritou<br/>
  **Recently tested with GigaSpaces version**: XAP 9.7<br/>
  **Last Update:** Apr 2014<br/>
 {% endtip %}
@@ -42,7 +42,7 @@ mvn clean install
 ##### Step 3:	Run the tool to export the objects<br/>
 {% highlight console %}
 cd target
-java -classpath < classpath > com.gigaspaces.support.export.SpaceClassExporterTool -e
+java -classpath < classpath > com.gigaspaces.tools.importexport.SpaceDataImportExportMain -e
 {% endhighlight %}
 
 
@@ -69,7 +69,7 @@ In this case we are using a simple Account POJO.
 ##### Step 4:	Run the tool to import the objects back into a space<br/>
 {% highlight console %}
 cd target
-java -classpath < classpath > com.gigaspaces.support.export.SpaceClassExporterTool -e
+java -classpath < classpath > com.gigaspaces.tools.importexport.SpaceDataImportExportMain -e
 {% endhighlight %}
 
 
