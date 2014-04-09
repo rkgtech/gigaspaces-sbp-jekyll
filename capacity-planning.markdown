@@ -74,7 +74,7 @@ You may decrease the raw object footprint (not the indexes footprint) using the 
 {% endtip %}
 
 {% tip %}
-You can reduce the JVM memory footprint using the `-XX:+UseCompressedOops` JVM option. It is part of the JDK6u14 and JDK7. See more details here: [http://wikis.sun.com/display/HotSpotInternals/CompressedOops](http://wikis.sun.com/display/HotSpotInternals/CompressedOops). It is highly recommended to use the latest JDK release when using this option.
+You can reduce the JVM memory footprint using the `-XX:+UseCompressedOops` JVM option. It is part of the JDK6u14 and JDK7. See more details here: [https://wikis.oracle.com/display/HotSpotInternals/CompressedOops](https://wikis.oracle.com/display/HotSpotInternals/CompressedOops). It is highly recommended to use the latest JDK release when using this option.
 {% endtip %}
 
 # Active Clients vs. Cores vs. Heap Size

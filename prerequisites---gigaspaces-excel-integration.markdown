@@ -10,7 +10,7 @@ weight: 100
 
 Before you begin, make sure:
 
-- [GigaSpaces XAP.NET ](http://www.gigaspaces.com/LatestProductVersion) is [Installed ](/tutorials/dotnet-installation.html).
+- [GigaSpaces XAP.NET ](http://www.gigaspaces.com/LatestProductVersion) is [Installed ](/tutorials/installation-guide.html).
 Please note: the Excel Space Viewer supports only GigaSpaces version 6.5.1.
 
 - [Microsoft Office Excel 2003 with Primary Interop Assemblies](http://msdn2.microsoft.com/en-us/library/aa159923(office.11).aspx) is installed.
