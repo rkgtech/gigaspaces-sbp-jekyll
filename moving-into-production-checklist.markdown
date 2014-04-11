@@ -60,7 +60,7 @@ GigaSpaces uses TCP/IP for most of its remote operations. The following componen
 {: .table .table-bordered}
 | Service | Description | Configuration Property | Default value |Comment|
 |:--------|:------------|:-----------------------|:--------------|:------|
-|[Lookup Service listening port](/product_overview/the-lookup-service.html) |Used as part of the lookup discovery protocol.|`com.sun.jini.reggie.initialUnicastDiscoveryPort` System property|XAP 6: **4162**{% wbr %}XAP 7: **4164**{% wbr %}XAP 8: **4166**| |
+|[Lookup Service listening port](/product_overview/the-lookup-service.html) |Used as part of the lookup discovery protocol.|`com.sun.jini.reggie.initialUnicastDiscoveryPort` System property|XAP 6: **4162**{% wbr %}XAP 7: **4164**{% wbr %}XAP 8: **4166** {% wbr %}XAP 9: **4174**| |
 |[LRMI listening port]({%latestadmurl%}/tuning-communication-protocol.html)|Used with client-space and space-space communication. |`com.gs.transport_protocol.lrmi.bind-port` System property. |variable, random| |
 |RMI registry listening port |Used as an alternative directory service.| `com.gigaspaces.system.registryPort` System property|10098 and above.| |
 |Webster listening port|Internal web service used as part of the application deployment process. |`com.gigaspaces.start.httpPort` System property|9813| |
