@@ -64,7 +64,6 @@ C:\GigaSpaces\XAP.NET 9.7.0 x86\NET v4.0.30319\Bin\Gs-webui.exe
 
 Keep this grid name (mydatagrid) handy as you will be using it later on.
 
-NOTE: If you would like to capture all the data available before CDC is enabled and the DeltaServer is run, you would need to preload data into the datagrid. 
 
 #### Step 1:
 Note:-Make Sure Sql-Server Agent is enabled.
